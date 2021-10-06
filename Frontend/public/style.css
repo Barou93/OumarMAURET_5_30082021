@@ -107,6 +107,10 @@ input {
   border-radius: 0;
 }
 
+a {
+  text-decoration: none;
+}
+
 .navbar {
   text-align: center;
   text-decoration: none;
@@ -261,6 +265,31 @@ input {
 .products__card .infos:hover {
   text-decoration: underline;
   color: #ff79da;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f2f2f2;
+}
+.footer a {
+  color: #ff79da;
+}
+.footer a:hover {
+  color: #2c9c81;
+  text-decoration: underline;
+}
+.footer__logo img {
+  width: 245px;
+  height: 100%;
+  padding: 5px 46px;
+}
+.footer__copyright p {
+  margin-left: 25px;
+}
+.footer__author {
+  margin-right: 50px;
 }
 
 /*# sourceMappingURL=style.css.map */
