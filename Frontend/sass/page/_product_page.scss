@@ -1,0 +1,193 @@
+/*Style de la page produit*/
+
+%margin-bottom {
+  margin-bottom: 0.9rem;
+}
+%margin {
+  margin: 4.5rem 4.5rem;
+}
+%margin-top {
+  margin-top: 0.9rem;
+}
+
+.products__item {
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2.5rem 1.8rem;
+    max-width: max-content;
+    @include for-tablette-only {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0;
+    }
+  }
+
+  &__img__container {
+    flex: 0 0 50%;
+    @include for-tablette-only {
+      flex: 100%;
+    }
+  }
+
+  &__image {
+    background: #fff;
+    width: 100%;
+    height: 100%;
+    //box-shadow: 0 5px 15px 0 #5c5c5c;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  &__description__container {
+    flex: 0 0 40%;
+    margin: 2.5rem;
+    @include for-tablette-only {
+      margin: 0;
+      flex: 1;
+    }
+  }
+  &__descriptions {
+    @extend %margin-bottom;
+    @include for-tablette-only {
+      margin: 1.2rem;
+    }
+
+    h2 {
+      font-size: 1.3rem;
+      @extend %margin-bottom;
+    }
+    span {
+      font-size: 2.5rem;
+      color: $color-tertiary;
+    }
+    p {
+      font-size: 1rem;
+      @extend %margin-top;
+    }
+  }
+
+  &__details {
+    @include for-tablette-only {
+      margin: 1.2rem;
+    }
+    h2 {
+      @extend %margin-bottom;
+      font-size: 1.2rem;
+    }
+  }
+  &__select {
+    @extend %margin-top;
+    position: relative;
+    display: flex;
+    width: 20em;
+    height: 3em;
+    line-height: 3;
+    overflow: hidden;
+    border-radius: 0.25em;
+    @include for-tablette-only {
+      width: 100%;
+    }
+
+    select {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      -ms-appearance: none;
+      appearance: none;
+      outline: 0;
+      box-shadow: none;
+      border: 1px solid #f2f2f2 !important;
+      background: #fff;
+      background-image: none;
+      flex: 1;
+      padding: 0 0.5em;
+      color: #5c5c5c;
+      cursor: pointer;
+      font-size: 1em;
+    }
+    &::after {
+      content: "\25BC";
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 0 1em;
+      background: #f2f2f2;
+      cursor: pointer;
+      pointer-events: none;
+      transition: 0.25s all ease;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__card {
+    margin-top: 1.5rem;
+    background: fuchsia;
+    width: 150px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    @include for-tablette-only {
+      width: 100%;
+    }
+    &:hover {
+      background: $color-dark-green;
+    }
+
+    &__button {
+      color: #fff;
+      text-align: center;
+    }
+  }
+}
+
+.color {
+  border-radius: 50%;
+  background-color: #5c5c5c;
+}
+
+/*
+flex: 1 1 60%;
+
+  @include for-desktop-only {
+      width: 100%;
+    }
+    @include for-tablette-only {
+      width: 100%;
+    }
+     @include for-tablette-only {
+      text-align: center;
+    }
+
+      @include for-tablette-only {
+      text-align: center;
+    }
+      @include for-tablette-only {
+      text-align: center;
+      h2 {
+        font-size: 1.9rem !important;
+      }
+      p {
+        font-size: 2rem !important;
+      }
+    }
+
+      @include for-tablette-only {
+      display: flex;
+      flex-flow: column wrap;
+    }
+
+      @include for-tablette-only {
+      width: 100%;
+      text-align: center;
+    }
+
+    @include for-desktop-only {
+      width: 100%;
+    }
+**/

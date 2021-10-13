@@ -1,0 +1,113 @@
+/*Style de la page panier*/
+@import "../utils/mixin";
+
+%btn {
+  width: 200px;
+  line-height: 50px;
+  font-size: 0.9rem;
+  height: 50px;
+  text-align: center;
+  color: #fff;
+}
+
+.card {
+  margin: 3rem;
+  &__title {
+    font-size: 2.5rem;
+    margin-top: 2.5rem;
+  }
+  td {
+    padding: 10px 5px;
+  }
+
+  &__item {
+    margin: 2rem auto;
+    &__table {
+      width: 100%;
+      th {
+        text-align: left;
+        background: $color-tertiary;
+        padding: 5px;
+        color: #fff;
+        margin-top: 1.2rem;
+      }
+    }
+    &__product {
+      display: flex;
+      flex-wrap: wrap;
+
+      img {
+        height: 100px;
+        width: 100px;
+        margin-right: 20px;
+        background: #dddd;
+      }
+    }
+    &__infos {
+      margin: 1.1rem;
+      p,
+      small {
+        margin-bottom: 1.2rem;
+      }
+      a {
+        position: relative;
+        top: 15px;
+        color: $primarycolor;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+    input {
+      position: absolute;
+      width: 40px;
+      height: 30px;
+      padding: 5px;
+
+      border: 1px solid #f2f2f2;
+    }
+    .price_infos {
+      position: absolute;
+    }
+  }
+  .total-table {
+    background: #f4f4f4;
+    padding: 5px;
+    position: absolute;
+    right: 50px;
+    width: 100%;
+    max-width: 250px;
+  }
+  &__button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8.5rem;
+    @include for-phone-only {
+      display: flex;
+      flex-direction: column-reverse;
+    }
+    &__shop {
+      @include for-phone-only {
+        width: 80%;
+        margin-top: 2.2rem;
+      }
+
+      @extend %btn;
+      background: $color-tertiary;
+      &:hover {
+        background: #000;
+      }
+    }
+    &__valide {
+      @include for-phone-only {
+        width: 80%;;
+      }
+      @extend %btn;
+      background: $color-dark-green;
+      &:hover {
+        background: #000;
+      }
+    }
+  }
+}

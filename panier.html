@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta
+      name="description"
+      content="Orinico votre magasin spécialiser dans la vente de pelluche pour enfants en ligne "
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="shortcut icon"
+      href="./Frontend/img/orinoco_logo.png"
+      type="image/x-icon"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+      integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="Frontend\public\style.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="navbar__container">
+          <div class="navbar__logo">
+            <a href="index.html">
+              <img
+                src="./Frontend/img/orinoco_logo.png"
+                alt="logo du site Orinico"
+                class="navbar__logo-img"
+              />
+            </a>
+          </div>
+          <div>
+            <ul class="navbar__list">
+              <li>
+                <a href="#" class="navbar__link active"></a>
+              </li>
+              <li><a href="#" class="navbar__link card"></a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <section class="card">
+      <h1 class="card__title">Mon panier</h1>
+      <div class="card__item">
+        <table class="card__item__table">
+         <thead class="card__item__thead" >
+              <tr>
+                  <th>Produits</th>
+                  <th>Quantités</th>
+                  <th>Prix</th>
+              </tr>
+         </thead>
+          <tbody>
+               <tr>
+              <td class="card__td">
+            <div class="card__item__product">
+              <img
+                src="./Frontend/img/oursons_2.jpg"
+                alt="photo du produit ajouter au panier"
+              />
+              <div class="card__item__infos">
+                <p>Ourson pour bébé</p>
+                <small>25$</small> <br>
+                <a href="#">Supprimer</a>
+              </div>
+            </div>
+            <td>
+              <input type="number" value="1">  
+            </td>
+            <td class="price_infos">25$</td>
+          </td>
+        </tr>
+          </tbody>
+        </table> 
+      </div>
+       <div class="total-price">
+              <table class="total-table">
+                  <tr>
+                    <td>Montant total</td>
+                    <td>5310 FCFA</td>
+                  </tr>
+              </table>
+          </div>
+          <div class="card__button">
+            <a class="card__button__shop" href="produit.html">Continuez le shopping</a>
+            <a class="card__button__valide" href="checkout.html">Valider mon panier</a>
+          </div>
+    </section>
+    <footer>
+      <div class="footer">
+        <div class="footer__logo">
+          <a href="#">
+            <img
+              src="./Frontend/img/orinoco_logo.png"
+              alt="Logo du site Orinico"
+            />
+          </a>
+        </div>
+        <div class="footer__copyright">
+          <p>Site réaliser pour <a href="#">OpenClassRooms </a></p>
+        </div>
+        <div class="footer__author">
+          <p>Propulser par <a href="#">Oumar MAURET</a></p>
+        </div>
+      </div>
+    </footer>
+    <script src="Frontend\js\index.js"></script>
+    <script src=""></script>
+  </body>
+</html>

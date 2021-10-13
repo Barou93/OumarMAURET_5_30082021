@@ -1,8 +1,14 @@
+@import "../utils/mixin";
+
 .footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: #f2f2f2;
+  @include for-phone-only {
+    display: flex;
+    flex-direction: column;
+  }
   a {
     color: $color-tertiary;
     &:hover {
@@ -19,11 +25,23 @@
     }
   }
   &__copyright {
+    @include for-phone-only {
+      text-align: center;
+      margin-bottom: 1.2rem;
+    }
     p {
+      @include for-phone-only {
+        margin-bottom: 1.2rem;
+        margin-left: 0;
+      }
       margin-left: 25px;
     }
   }
   &__author {
+    @include for-phone-only {
+      margin-bottom: 1.2rem;
+      margin-right: 0;
+    }
     margin-right: 50px;
   }
 }

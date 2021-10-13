@@ -25,5 +25,4 @@ async function getApi() {
 
 }
 
-
-console.log(getApi());
+getApi();

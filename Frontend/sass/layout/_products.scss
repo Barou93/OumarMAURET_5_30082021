@@ -1,3 +1,4 @@
+@import "../utils/mixin";
 .products {
   &__title {
     text-align: center;
@@ -7,26 +8,29 @@
   &__contain {
     display: flex;
     justify-content: space-between;
-    align-items: stretch;
+    align-items: center;
     flex-wrap: wrap;
-    margin: 50px;
+    @include for-phone-only {
+      display: flex;
+      flex-direction: column;
+    }
   }
 
   &__container {
+    flex: 1 1 30%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    margin-top: 50px;
-    width: 325px;
+    margin: 2rem 1.5rem;
     height: 100%;
     background: #fff;
     box-shadow: 0 5px 15px 0 #5c5c5c;
   }
   &__item {
     img {
-      height: 325px;
-      width: 325px;
+      height: 100%;
+      width: 100%;
     }
   }
 
@@ -34,13 +38,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    //margin-bottom: 20px;
-    //margin-top: 20px;
+
     margin: 20px 10px;
 
     h2 {
       font-size: 20px;
       font-weight: bold;
+      color: #000;
     }
     p {
       font-size: 25px;
@@ -52,18 +56,19 @@
     justify-content: space-between;
     align-items: center;
     margin: 10px 10px;
-    //text-align: center;
+
     .add_card,
     .infos {
       margin-left: 18px;
       text-decoration: none;
-      //font-size: 20px;
+      color: #000;
     }
     .add_card {
-      font-size: 20px;
+      font-size: 17px;
       background: $color-tertiary;
       color: #fff;
       padding: 8px;
+      text-align: center;
       &:hover {
         background: #2c9c81;
       }
