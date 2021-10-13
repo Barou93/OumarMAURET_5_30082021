@@ -7,7 +7,7 @@
     <title></title>
     <meta
       name="description"
-      content="Orinico votre magasin spécialiser dans la vente de pelluche pour enfants en ligne "
+      content="Orinico  Retrouver tous vos produits selectionner dans ce panier"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
@@ -57,48 +57,97 @@
       <h1 class="card__title">Mon panier</h1>
       <div class="card__item">
         <table class="card__item__table">
-         <thead class="card__item__thead" >
-              <tr>
-                  <th>Produits</th>
-                  <th>Quantités</th>
-                  <th>Prix</th>
-              </tr>
-         </thead>
+          <thead class="card__item__thead">
+            <tr>
+              <th>Produits</th>
+              <th>Quantités</th>
+              <th>Prix</th>
+            </tr>
+          </thead>
           <tbody>
-               <tr>
+            <tr>
               <td class="card__td">
-            <div class="card__item__product">
-              <img
-                src="./Frontend/img/oursons_2.jpg"
-                alt="photo du produit ajouter au panier"
-              />
-              <div class="card__item__infos">
-                <p>Ourson pour bébé</p>
-                <small>25$</small> <br>
-                <a href="#">Supprimer</a>
-              </div>
-            </div>
-            <td>
-              <input type="number" value="1">  
-            </td>
-            <td class="price_infos">25$</td>
-          </td>
-        </tr>
+                <div class="card__item__product">
+                  <img
+                    src="./Frontend/img/oursons_2.jpg"
+                    alt="photo du produit ajouter au panier"
+                  />
+                  <div class="card__item__infos">
+                    <p>Ourson pour bébé</p>
+                    <small>25$</small> <br />
+                    <a href="#">Supprimer</a>
+                  </div>
+                </div>
+              </td>
+
+              <td>
+                <input type="number" value="1" />
+              </td>
+              <td class="price_infos">25$</td>
+            </tr>
           </tbody>
-        </table> 
+        </table>
+        <div class="total-price">
+          <table class="total-table">
+            <tr>
+              <td>Montant total</td>
+              <td>5310 FCFA</td>
+            </tr>
+          </table>
+        </div>
+        <div class="form__container">
+          <div class="form__container__title">
+            <h2>Finaliser votre commande</h2>
+          </div>
+          <div class="container">
+            <form action="">
+              <h2 class="container__title">Renseigner vos informations</h2>
+              <div class="container__user__details">
+                <div class="container__input">
+                  <label for="firstname" class="details">Nom </label>
+                  <input type="text" id="firstname" />
+                </div>
+                <div class="container__input">
+                  <label for="lastname" class="details">Prenom</label>
+                  <br />
+                  <input type="text" id="lastname" />
+                  <br />
+                </div>
+                <div class="container__input">
+                  <label for="adresse" class="details">Adresse</label>
+                  <input type="text" id="adresse" />
+                </div>
+                <div class="container__input">
+                  <label for="city" class="details">Ville</label>
+                  <input type="text" id="city" />
+                </div>
+                <div class="container__input">
+                  <label for="email" class="details">E-mail</label>
+                  <input type="text" id="email" />
+                </div>
+                <div class="container__input">
+                  <label for="number" class="details"
+                    >Numéro de téléphone</label
+                  >
+                  <input type="text" id="number" />
+                </div>
+              </div>
+              <div class="container__valide">
+                <input
+                  type="submit"
+                  class="card__button__valide"
+                  value="Valider ma commande"
+                />
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
-       <div class="total-price">
-              <table class="total-table">
-                  <tr>
-                    <td>Montant total</td>
-                    <td>5310 FCFA</td>
-                  </tr>
-              </table>
-          </div>
-          <div class="card__button">
-            <a class="card__button__shop" href="produit.html">Continuez le shopping</a>
-            <a class="card__button__valide" href="checkout.html">Valider mon panier</a>
-          </div>
+      <div class="card__button">
+        <a class="card__button__shop" href="produit.html"
+          >Continuez le shopping</a
+        >
+      </div>
     </section>
     <footer>
       <div class="footer">
