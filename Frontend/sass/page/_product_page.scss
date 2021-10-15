@@ -35,7 +35,6 @@
     background: #fff;
     width: 100%;
     height: 100%;
-    //box-shadow: 0 5px 15px 0 #5c5c5c;
 
     img {
       width: 100%;
@@ -150,44 +149,3 @@
   border-radius: 50%;
   background-color: #5c5c5c;
 }
-
-/*
-flex: 1 1 60%;
-
-  @include for-desktop-only {
-      width: 100%;
-    }
-    @include for-tablette-only {
-      width: 100%;
-    }
-     @include for-tablette-only {
-      text-align: center;
-    }
-
-      @include for-tablette-only {
-      text-align: center;
-    }
-      @include for-tablette-only {
-      text-align: center;
-      h2 {
-        font-size: 1.9rem !important;
-      }
-      p {
-        font-size: 2rem !important;
-      }
-    }
-
-      @include for-tablette-only {
-      display: flex;
-      flex-flow: column wrap;
-    }
-
-      @include for-tablette-only {
-      width: 100%;
-      text-align: center;
-    }
-
-    @include for-desktop-only {
-      width: 100%;
-    }
-**/

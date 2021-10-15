@@ -218,12 +218,12 @@ a {
   }
 }
 .products__container {
-  flex: 1 1 30%;
+  flex: 0 0 30%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  margin: 2rem 1.5rem;
+  margin: 2rem 4.5rem;
   height: 100%;
   background: #fff;
   box-shadow: 0 5px 15px 0 #5c5c5c;
@@ -469,46 +469,6 @@ a {
   background-color: #5c5c5c;
 }
 
-/*
-flex: 1 1 60%;
-
-  @include for-desktop-only {
-      width: 100%;
-    }
-    @include for-tablette-only {
-      width: 100%;
-    }
-     @include for-tablette-only {
-      text-align: center;
-    }
-
-      @include for-tablette-only {
-      text-align: center;
-    }
-      @include for-tablette-only {
-      text-align: center;
-      h2 {
-        font-size: 1.9rem !important;
-      }
-      p {
-        font-size: 2rem !important;
-      }
-    }
-
-      @include for-tablette-only {
-      display: flex;
-      flex-flow: column wrap;
-    }
-
-      @include for-tablette-only {
-      width: 100%;
-      text-align: center;
-    }
-
-    @include for-desktop-only {
-      width: 100%;
-    }
-**/
 /*Style de la page panier*/
 .card__button__valide, .card__button__shop {
   width: 200px;
@@ -713,6 +673,29 @@ flex: 1 1 60%;
 .checkout__container__title p {
   margin-top: 1.9rem;
   font-size: 1.9rem;
+}
+
+.error__container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.error__container img {
+  height: 100%;
+  width: calc(75% - 20px);
+}
+.error__container p {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: crimson;
+  text-align: center;
+}
+@media (max-width: 599px) {
+  .error__container p {
+    font-size: 1.4rem;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

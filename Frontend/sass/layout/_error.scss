@@ -1,0 +1,21 @@
+.error__container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  img {
+    height: 100%;
+    width: calc(150% / 2 - 20px);
+  }
+
+  p {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: crimson;
+    text-align: center;
+    @include for-phone-only {
+      font-size: 1.4rem;
+    }
+  }
+}
