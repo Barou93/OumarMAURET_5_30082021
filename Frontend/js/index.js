@@ -27,6 +27,7 @@ const getProducts = async () => {
             `
 
         })
+    console.log(products);
 }
 
 

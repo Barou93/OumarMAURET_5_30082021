@@ -15,12 +15,8 @@
       href="./Frontend/img/orinoco_logo.png"
       type="image/x-icon"
     />
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
-      integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
-      crossorigin="anonymous"
-    />
+    <script src="https://unpkg.com/boxicons@2.0.9/dist/boxicons.js"></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -47,13 +43,13 @@
               <li>
                 <a href="#" class="navbar__link active"></a>
               </li>
-              <li><a href="#" class="navbar__link card"></a></li>
+              <li><a href="#" class="navbar__link shopcard"></a></li>
             </ul>
           </div>
         </div>
       </nav>
     </header>
-    <section class="card">
+    <section class="card" id="card">
       <h1 class="card__title">Mon panier</h1>
       <!-- <div class="error__container">
         <p>
@@ -61,15 +57,16 @@
         </p>
         <img src="./Frontend/img/404_1.png" alt="Photo erreur 404" />
       </div> -->
-      <div class="card__item">
-        <table class="card__item__table">
-          <thead class="card__item__thead">
-            <tr>
-              <th>Produits</th>
-              <th>Quantités</th>
-              <th>Prix</th>
-            </tr>
-          </thead>
+      <!-- <div class="card__item">
+        <table class="card__item__table">-->
+       <!-- <thead class="card__item__thead">-->
+        <tr>
+          <th>Produits</th>
+          <th>Quantités</th>
+          <th>Prix</th>
+        </tr>
+      </thead>
+      <!-- 
           <tbody>
             <tr>
               <td class="card__td">
@@ -100,8 +97,8 @@
               <td>5310 FCFA</td>
             </tr>
           </table>
-        </div>
-        <div class="form__container">
+        </div> -->
+      <!-- div class="form__container">
           <div class="form__container__title">
             <h2>Finaliser votre commande</h2>
           </div>
@@ -153,7 +150,7 @@
         <a class="card__button__shop" href="produit.html"
           >Continuez le shopping</a
         >
-      </div>
+      </div>-->
     </section>
     <footer>
       <div class="footer">
@@ -173,7 +170,7 @@
         </div>
       </div>
     </footer>
-    <script src="Frontend\js\index.js"></script>
+    <script src="Frontend\js\panier.js"></script>
     <script src=""></script>
   </body>
 </html>

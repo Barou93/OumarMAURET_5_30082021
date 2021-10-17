@@ -1,3 +1,4 @@
+@import "../utils/mixin";
 .navbar {
   text-align: center;
   text-decoration: none;
@@ -7,6 +8,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    @include for-only-small-phone {
+      display: flex;
+      flex-direction: column;
+      //width: 200px;
+    }
+    //margin: 0;
   }
   &__logo-img {
     width: 245px;
@@ -17,42 +24,79 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-right: 45px;
+    @include for-only-small-phone {
+      margin: 1rem;
+      //width: 200px;
+    }
+
+    //margin-right: 25px;
   }
   &__link {
-    margin-left: 25px;
-    font-size: 20px;
-    text-decoration: none;
-    color: #000;
+    margin: 2.5rem;
+    @include for-phone-only {
+      margin: 1.2rem;
+      @include for-only-small-phone {
+        margin: 2rem;
+        //width: 200px;
+      }
+    }
     &.active {
-      font-weight: bold;
       //Icon de  la page d'accueil
       &::before {
         content: "";
         display: inline-block;
         width: 30px;
         height: 30px;
-        background: url("../icons/home-solid.svg") center center / contain
+        background: url("../icons/bx-home-smile.svg") center center / contain
           no-repeat;
       }
     }
 
-    &.card {
+    &.shopcard {
       //Icone de  la page panier
+
       &::before {
         content: "";
         display: inline-block;
         width: 30px;
         height: 30px;
-        background: url("../icons/shopping-bag-solid.svg") center center /
-          contain no-repeat;
+        background: url("../icons/bx-shopping-bag.svg") center center / contain
+          no-repeat;
+
+        @include for-phone-only {
+          width: 25px;
+          height: 25px;
+        }
       }
     }
+  }
+}
 
-    &:hover {
-      text-decoration: underline;
-      color: $primarycolor;
-    }
+.count {
+  display: inline-block;
+  position: absolute;
+  right: 30px;
+  width: 20px;
+  height: 20px;
+  border: 1px solid $color-tertiary;
+  background: $color-tertiary;
+  color: #fff;
+  line-height: 8px;
+  font-size: 15px;
+  border-radius: 50%;
+  padding: 5px;
+  text-align: center;
+  @include for-phone-only {
+    right: 5px;
+    width: 18px;
+    height: 18px;
+    font-size: 13px;
+    line-height: 4px;
+  }
+  @include for-only-small-phone {
+    position: relative;
+    bottom: 10px;
+    right: 5px;
   }
 }
 
@@ -75,6 +119,9 @@
     font-weight: bold;
     padding: 2.5rem;
     text-align: center;
+    @include for-phone-only {
+      font-size: 30px;
+    }
   }
   &__button {
     flex: none;
@@ -91,6 +138,10 @@
     &:hover {
       background: #000;
       //box-shadow: 0 5px 15px 0 #c3c3c3;
+    }
+    @include for-phone-only {
+      width: 150px;
+      font-size: 25px;
     }
   }
 }

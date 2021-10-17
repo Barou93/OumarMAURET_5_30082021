@@ -24,24 +24,24 @@ const URL = 'http://localhost:3000/api/teddies' + '/' + productID;
 //console.log(URL);
 
 
-
+//Récupéter les informations de l'API 
 const getProductsData = async () => {
-    await fetch(URL)
-        .then((res) => res.json())
-        .then((data) => productDetail = data)
-    console.log(productDetail);
+  await fetch(URL)
+    .then((res) => res.json())
+    .then((data) => productDetail = data)
+  console.log(productDetail);
 
 }
 
-
+//Afficher le produit selectionner à l'aide de l'ID du produit
 const displayProductsDetail = async () => {
-    await getProductsData();
+  await getProductsData();
 
-    let productItem = document.getElementById('productItem');
-    // Récupérer le produit pqr son ID et l'afficher sur le navigateur
-    productItem.innerHTML =
+  let productItem = document.getElementById('productItem');
+  // Récupérer le produit pqr son ID et l'afficher sur le navigateur
+  productItem.innerHTML =
 
-        `
+    `
         <div class="products__item__container">
         <div class="products__item__img__container">
           <div class="products__item__image">
@@ -63,21 +63,122 @@ const displayProductsDetail = async () => {
           </div>
           <div class="products__item__select">
                 <select id="select" name="select">
-              <option value="" class="option">Selectionner votre modèle</option>
-              <option value="${productDetail.colors}" class="option ">${productDetail.colors}</option>
+                
             </select>
           </div>
           <div class="products__item__card">
-              <a href="${productDetail._id} " class="products__item__card__button">Ajouter au panier</a>
+              <a href="# " class="products__item__card__button">Ajouter au panier</a>
             </select>
           </div>
         </div>
       </div>
       `
-    const selectID = document.getElementById('select');
-    console.log(selectID);
+
 };
-displayProductsDetail()
+
+//Ajouter le produit selectionner avec les options dans le panier de l'utitisateur
+const addUserProductSelect = async () => {
+  await displayProductsDetail();
+  //Selectionner l'ID du formulaire
+  const selectID = document.getElementById('select');
+
+  //console.log(selectID);
+
+  //Stocker le choix de des options de  l'USER dans une variable
+  const userOptionCheck = productDetail.colors;
+  //console.log(userOptionCheck);
+  //Tableau vide dans lequel les options choisis par l'utilisateur seront stocker
+  let options = [];
+
+  //Ajouter les différentes options pour que l'utilisateur puisse le selectionner
+  for (let option of userOptionCheck) {
+    options += `
+     
+     <option value="${option}" class="option ">${option}</option>
+     
+    `
+  }
+  //console.log(options);
+
+  //Stocker les produits de l'utilisateur dans le localStorage
+
+
+  //Afficher les options coleur sur le navigateur de l'utilisateur
+
+  const addUserSelection = document.getElementById('select');
+
+  addUserSelection.innerHTML = options;
+
+  //Selectionner le BUTTON pour ajouter l'article dans le panier
+  const btnAddToCart = document.querySelector('.products__item__card__button');
+  //console.log(btnAddToCart);
+
+
+
+  //Ajouter un événement sur le button lors du click
+  btnAddToCart.addEventListener('click', (e) => {
+    e.preventDefault();
+    const userFormSelect = selectID.value;
+    //console.log(userFormSelect);
+
+    //Récupérer les valeurs du produits et le mettre dans le panier
+    let getProduct = {
+      productName: productDetail.name,
+      productImg: productDetail.imageUrl,
+      idProduct: productDetail._id,
+      productOption: userFormSelect,
+      quantity: 1,
+      price: productDetail.price / 100
+    }
+    console.log(getProduct);
+
+
+
+    const confirmCard = () => {
+      if (confirm(`${productDetail.name}  couleur : ${userFormSelect}  a été ajouter à votre panier
+    pour consulter appuyer sur Ok  et annuler pour continuer vos achats`)) {
+        location.href = 'panier.html';
+      }
+
+      else {
+        //confirmation()
+        location.href = 'index.html';
+      }
+
+    }
+    //Fonction qui permet de stocker les articles de l'utilisateur sur le localStorage
+    const userCardItem = () => {
+      //Ajout dans le tableau de l'objet avec ses values 
+      userProduct.push(getProduct);
+      localStorage.setItem('product', JSON.stringify(userProduct));
+    }
+
+    let userProduct = JSON.parse(localStorage.getItem('product')); //La methode JSON.parse transforme une chaîne JSON en un objet JavaScript
+    //let saveUserData = [];
+    console.log(userProduct);
+
+    //Si il y'a  déja  des produits enregristrer dans le localStorage 
+    if (userProduct) {
+      //userProduct = [];
+      userCardItem();
+      console.log(userProduct);
+      confirmCard();
+
+    }
+    //S'il y'a pas de produit enregistrer dans le localStorage
+    else {
+      userProduct = [];
+      userCardItem();
+      console.log(userProduct);
+      confirmCard();
+    }
+
+
+
+  });
+}
+
+addUserProductSelect();
 
 
 

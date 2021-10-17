@@ -124,6 +124,12 @@ a {
   justify-content: space-between;
   align-items: center;
 }
+@media (max-width: 420px) {
+  .navbar__container {
+    display: flex;
+    flex-direction: column;
+  }
+}
 .navbar__logo-img {
   width: 245px;
   height: 100%;
@@ -133,34 +139,76 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-right: 45px;
+}
+@media (max-width: 420px) {
+  .navbar__list {
+    margin: 1rem;
+  }
 }
 .navbar__link {
-  margin-left: 25px;
-  font-size: 20px;
-  text-decoration: none;
-  color: #000;
+  margin: 2.5rem;
 }
-.navbar__link.active {
-  font-weight: bold;
+@media (max-width: 599px) {
+  .navbar__link {
+    margin: 1.2rem;
+  }
+}
+@media (max-width: 599px) and (max-width: 420px) {
+  .navbar__link {
+    margin: 2rem;
+  }
 }
 .navbar__link.active::before {
   content: "";
   display: inline-block;
   width: 30px;
   height: 30px;
-  background: url("../icons/home-solid.svg") center center/contain no-repeat;
+  background: url("../icons/bx-home-smile.svg") center center/contain no-repeat;
 }
-.navbar__link.card::before {
+.navbar__link.shopcard::before {
   content: "";
   display: inline-block;
   width: 30px;
   height: 30px;
-  background: url("../icons/shopping-bag-solid.svg") center center/contain no-repeat;
+  background: url("../icons/bx-shopping-bag.svg") center center/contain no-repeat;
 }
-.navbar__link:hover {
-  text-decoration: underline;
-  color: crimson;
+@media (max-width: 599px) {
+  .navbar__link.shopcard::before {
+    width: 25px;
+    height: 25px;
+  }
+}
+
+.count {
+  display: inline-block;
+  position: absolute;
+  right: 30px;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #ff79da;
+  background: #ff79da;
+  color: #fff;
+  line-height: 8px;
+  font-size: 15px;
+  border-radius: 50%;
+  padding: 5px;
+  text-align: center;
+}
+@media (max-width: 599px) {
+  .count {
+    right: 5px;
+    width: 18px;
+    height: 18px;
+    font-size: 13px;
+    line-height: 4px;
+  }
+}
+@media (max-width: 420px) {
+  .count {
+    position: relative;
+    bottom: 10px;
+    right: 5px;
+  }
 }
 
 .slider {
@@ -183,6 +231,11 @@ a {
   padding: 2.5rem;
   text-align: center;
 }
+@media (max-width: 599px) {
+  .slider__title {
+    font-size: 30px;
+  }
+}
 .slider__button {
   flex: none;
   font-size: 35px;
@@ -198,6 +251,12 @@ a {
 }
 .slider__button:hover {
   background: #000;
+}
+@media (max-width: 599px) {
+  .slider__button {
+    width: 150px;
+    font-size: 25px;
+  }
 }
 
 .products__title {
@@ -645,6 +704,12 @@ a {
   .container__valide input {
     width: 60%;
   }
+}
+
+.empty {
+  text-align: center;
+  font-size: 45px;
+  font-weight: bold;
 }
 
 .checkout__container {

@@ -3,6 +3,11 @@
     @content;
   }
 }
+@mixin for-only-small-phone {
+  @media (max-width: 420px) {
+    @content;
+  }
+}
 
 @mixin for-tablette-only {
   @media (max-width: 768px) {
