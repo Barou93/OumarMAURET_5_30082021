@@ -1,0 +1,119 @@
+.title__container {
+  h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-top: 100px;
+    color: green;
+    font-weight: bold;
+  }
+}
+
+.form__container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(235, 244, 242);
+  margin-top: 45px;
+}
+
+form {
+  width: 50%;
+  min-width: 300px;
+  max-width: 600px;
+  background: #fff;
+  display: grid;
+  grid-template-rows: repeat(5, 100px);
+  padding: 60px 45px 30px;
+  border-radius: 16px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  position: relative;
+  @include for-phone-only {
+    width: auto;
+  }
+}
+div {
+  transition: 0.2s;
+}
+label {
+  letter-spacing: 1px;
+}
+input[type="text"] {
+  margin: 7px 0 7px;
+  border: 1px solid transparent;
+  background: rgb(235, 244, 242);
+  height: 36px;
+  width: 100%;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 9px;
+  font-size: 1.1rem;
+  padding-left: 10px;
+  transition: 0.2s;
+  &:focus {
+    border: 1px solid #5ef9a4;
+  }
+}
+span {
+  display: block;
+  margin-bottom: 20px;
+  font-size: 0.8rem;
+  visibility: visible;
+  opacity: 0;
+  transition: 0.3s;
+  color: red;
+}
+p {
+  background: red;
+  width: 33%;
+  height: 6px;
+  margin: -2px 0 2px;
+  border-radius: 50px;
+  visibility: hidden;
+  transition: 0.3s;
+}
+#security span {
+  display: inline;
+}
+
+input[type="submit"] {
+  border: none;
+  background: linear-gradient(65deg, #16d9e7, #5ef9a4);
+  width: 50%;
+  margin: 12px auto 0;
+  padding: 10px;
+  border-radius: 150px;
+  font-size: 1.2rem;
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: 0.3s ease;
+  &:hover {
+    filter: brightness(105%);
+    transform: translateX(2px);
+  }
+}
+
+.error input[type="text"] {
+  color: red;
+  border: 1px solid rgba(255, 0, 0, 0.527);
+}
+.error span {
+  visibility: visible;
+  opacity: 1;
+  color: red;
+}
+
+.progressRed {
+  background: red;
+  width: 33%;
+  visibility: visible;
+}
+.progressBlue {
+  background: #16d9e7;
+  width: 67%;
+  visibility: visible;
+}
+.progressGreen {
+  width: 100%;
+  background: #5ef9a4;
+  visibility: visible;
+}
