@@ -62,8 +62,7 @@ const displayProductsDetail = async () => {
             <h2>Choisissez votre modèle</h2>
           </div>
           <div class="products__item__select">
-                <select id="select" name="select">
-                
+                <select id="select" name="select">    
             </select>
           </div>
           <div class="products__item__card">
@@ -76,17 +75,107 @@ const displayProductsDetail = async () => {
 
 };
 
+const UpdateQuantityValue = async () => {
+
+  const productQuantity = document.querySelector('.products__item__card');
+  let number = 1;
+  //console.log(productQuantity);
+
+  let quantityHTML = `
+   <div class="quantity_container">
+           <div class="qte-minus" id="minus"></div>
+          <span type="number" class="number" id="quantite_produit">${number}</span>
+          <div class="qte-plus" id="plus"></div>
+           </div>
+  `
+
+  productQuantity.insertAdjacentHTML("beforebegin", quantityHTML);
+  let quantityNum = document.getElementById('quantite_produit');
+
+  console.log(typeof quantityNum);
+  //let quantityContainer = document.querySelector('.quantity_container');
+  let addBtnArr = document.getElementById('plus');
+  let deducBtnArr = document.getElementById('minus');
+  console.log(addBtnArr, deducBtnArr);
+  number = quantityNum;
+
+  //console.log(number);
+  //Ajouter une nouvelle quantité au produit selectionner 
+  function addBtn() {
+    //let count = parseInt(plus.innerText);
+    if (isNaN(number) || number <= 0) {
+      number = 1;
+
+    } else {
+      number = number + 1;
+      quantityNum.innerHTML = number;
+      console.log(number);
+
+    }
+  }
+  //Diminuer la quantité du produit selectionner si cette valeur est superieur à 1
+  function deducBtn() {
+    //let count = parseInt(minus);
+    if (number === 1) {
+      number = 1;
+    } else {
+      number = number - 1;
+      quantityNum.innerHTML = number;
+      console.log(number);
+
+    }
+  }
+
+  //Fonction permet d'ajouter et de dimmunier la quantité du produit de l'utilisateur
+  function changeCartQuantity() {
+    addBtnArr.addEventListener('click', addBtn)
+
+    deducBtnArr.addEventListener('click', deducBtn)
+  }
+  changeCartQuantity();
+
+}
+//Variable ou la quantité du panier sera stocker
+const articleItem = document.querySelector('.count');
+console.log(articleItem);
+
+//Afficher la quantité de produit dans le panier après rafraichissement de la page
+function onLoadPage() {
+  let productNumbers = localStorage.getItem('cartCount');
+  if (productNumbers) {
+    articleItem.style.display = 'inline-block';
+    articleItem.textContent = productNumbers;
+  }
+}
+//Afficher sur l'icone panier le nombre de produit ajouter dans le panier
+function inCart() {
+  let productNumbers = localStorage.getItem('cartCount');
+
+  productNumbers = parseInt(productNumbers);
+  if (productNumbers) {
+    localStorage.setItem('cartCount', productNumbers);
+    articleItem.style.display = 'inline-block';
+    articleItem.textContent = productNumbers + 1;
+  } else {
+    localStorage.setItem('cartCount', 1);
+    articleItem.textContent = 1
+  }
+}
+onLoadPage();
+
 //Ajouter le produit selectionner avec les options dans le panier de l'utitisateur
 const addUserProductSelect = async () => {
   await displayProductsDetail();
+  await UpdateQuantityValue();
   //Selectionner l'ID du formulaire
   const selectID = document.getElementById('select');
-
+  const quantityValue = document.getElementById('quantite_produit');
   //console.log(selectID);
+  console.log(parseInt(quantityValue.innerText));
 
   //Stocker le choix de des options de  l'USER dans une variable
   const userOptionCheck = productDetail.colors;
-  //console.log(userOptionCheck);
+
   //Tableau vide dans lequel les options choisis par l'utilisateur seront stocker
   let options = [];
 
@@ -113,13 +202,15 @@ const addUserProductSelect = async () => {
   const btnAddToCart = document.querySelector('.products__item__card__button');
   //console.log(btnAddToCart);
 
-
-
   //Ajouter un événement sur le button lors du click
   btnAddToCart.addEventListener('click', (e) => {
     e.preventDefault();
     const userFormSelect = selectID.value;
-    //console.log(userFormSelect);
+    const quantity = parseInt(quantityValue.innerText);
+    //console.log(quantity);
+
+    //Afficher l'icone panier la quantité de produit ajouter au panier
+    inCart();
 
     //Récupérer les valeurs du produits et le mettre dans le panier
     let getProduct = {
@@ -127,22 +218,24 @@ const addUserProductSelect = async () => {
       productImg: productDetail.imageUrl,
       idProduct: productDetail._id,
       productOption: userFormSelect,
-      quantity: 1,
-      price: productDetail.price / 100
+      quantity: quantity,
+      price: (productDetail.price * quantity) / 100
     }
     console.log(getProduct);
 
 
-
+    //Validation de la commande 
     const confirmCard = () => {
       if (confirm(`${productDetail.name}  couleur : ${userFormSelect}  a été ajouter à votre panier
     pour consulter appuyer sur Ok  et annuler pour continuer vos achats`)) {
         location.href = 'panier.html';
+
+
       }
 
       else {
         //confirmation()
-        location.href = 'index.html';
+        location.href = 'produit.html?' + id;
       }
 
     }
@@ -151,11 +244,15 @@ const addUserProductSelect = async () => {
       //Ajout dans le tableau de l'objet avec ses values 
       userProduct.push(getProduct);
       localStorage.setItem('product', JSON.stringify(userProduct));
+
     }
+
 
     let userProduct = JSON.parse(localStorage.getItem('product')); //La methode JSON.parse transforme une chaîne JSON en un objet JavaScript
     //let saveUserData = [];
-    console.log(userProduct);
+
+
+
 
     //Si il y'a  déja  des produits enregristrer dans le localStorage 
     if (userProduct) {
@@ -163,7 +260,7 @@ const addUserProductSelect = async () => {
       userCardItem();
       console.log(userProduct);
       confirmCard();
-
+      inCart();
     }
     //S'il y'a pas de produit enregistrer dans le localStorage
     else {
@@ -171,10 +268,8 @@ const addUserProductSelect = async () => {
       userCardItem();
       console.log(userProduct);
       confirmCard();
+      inCart();
     }
-
-
-
   });
 }
 

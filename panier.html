@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="fr">
   <head>
     <meta charset="utf-8" />
@@ -43,7 +42,9 @@
               <li>
                 <a href="#" class="navbar__link active"></a>
               </li>
-              <li><a href="#" class="navbar__link shopcard"></a></li>
+              <li><a href="#" class="navbar__link shopcard">
+                 <span class="count"></span>
+              </a></li>
             </ul>
           </div>
         </div>
@@ -51,6 +52,16 @@
     </header>
     <section class="card" id="card">
       <h1 class="card__title">Mon panier</h1>
+      <div class="card__item">
+  <table class="card__item__table">
+    <thead class="card__item__thead">
+      <tr>
+        <th>Produits</th>
+        <th>Quantités</th>
+        <th>Prix</th>
+      </tr>
+    </thead>
+    <tbody class="cart-item">
       <!-- <div class="errorCcontainer">
         <p>
           Problème de connexion avec l'API est survenue, ! Veuillez réessayer
@@ -60,6 +71,8 @@
       <!-- <div class="card__item">
         <table class="card__item__table">-->
       <!-- <thead class="card__item__thead">-->
+     </tbody>
+  </table>
     </section>
     <footer>
       <div class="footer">

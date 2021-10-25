@@ -1,0 +1,83 @@
+//"\e6a3" code plus content
+//"\e6a4"  code moins content
+
+/*Button quantité sur la page Produit*/
+.quantity_container {
+  display: flex;
+  align-items: center;
+  margin: 0.5rem;
+}
+.number {
+  width: 35px;
+  height: 25px;
+  margin: 0.8rem;
+  text-align: center;
+  border: 2px solid #e4e4e4;
+  &:focus {
+    outline: none;
+  }
+}
+
+.qte-plus {
+  &::before {
+    content: "";
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    background: url("../icons/bx-plus.svg") center center / contain no-repeat;
+    background-color: #f4f4f4;
+    cursor: pointer;
+  }
+}
+
+.qte-minus {
+  &::before {
+    display: inline-block;
+    content: "";
+    width: 25px;
+    height: 25px;
+    background: url("../icons/bx-minus.svg") center center / contain no-repeat;
+    background-color: #f4f4f4;
+    cursor: pointer;
+  }
+}
+
+/*Button quantité sur la page Panier*/
+.input_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  bottom: 85px;
+}
+.minus-btn {
+  position: absolute;
+  left: 25px;
+  &::before {
+    position: relative;
+    right: 40px;
+    display: inline-block;
+    content: "";
+    width: 25px;
+    height: 25px;
+    background: url("../icons/bx-minus.svg") center center / contain no-repeat;
+    background-color: #f4f4f4;
+  }
+}
+//url(../icons/bx-home-smile.svg)
+.plus-btn {
+  //position: absolute;
+  position: absolute;
+  left: 50px;
+  &::before {
+    position: relative;
+    //right: 15px;
+    content: "";
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+
+    background: url("../icons/bx-plus.svg") center center / contain no-repeat;
+    background-color: #f4f4f4;
+  }
+}

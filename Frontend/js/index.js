@@ -17,16 +17,7 @@ const getProducts = async () => {
 
         .then((res) => res.json())
         .then((data) => products = data)
-        .catch(() => {
-            let error = document.querySelector('.error__container');
-            error.innerHTML =
-                `<p>
-                 Problème de connexion avec l'API est survenue, ! Veuillez réessayer
-                </p>
-                <img src="./Frontend/img/404_1.png" alt="Photo erreur 404" />
-            `
 
-        })
     console.log(products);
 }
 

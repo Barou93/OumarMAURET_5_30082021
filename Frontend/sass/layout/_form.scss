@@ -53,7 +53,7 @@ input[type="text"] {
     border: 1px solid #5ef9a4;
   }
 }
-span {
+.span {
   display: block;
   margin-bottom: 20px;
   font-size: 0.8rem;
@@ -62,7 +62,7 @@ span {
   transition: 0.3s;
   color: red;
 }
-p {
+.p {
   background: red;
   width: 33%;
   height: 6px;
@@ -71,7 +71,7 @@ p {
   visibility: hidden;
   transition: 0.3s;
 }
-#security span {
+#security .span {
   display: inline;
 }
 

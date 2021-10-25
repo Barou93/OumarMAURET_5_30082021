@@ -1,0 +1,76 @@
+@charset "UTF-8";
+/*Button quantité sur la page Produit*/
+.quantity_container {
+  display: flex;
+  align-items: center;
+  margin: 0.5rem;
+}
+
+.number {
+  width: 35px;
+  height: 25px;
+  margin: 0.8rem;
+  text-align: center;
+  border: 2px solid #e4e4e4;
+}
+.number:focus {
+  outline: none;
+}
+
+.qte-plus::before {
+  content: "";
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  background: url("../icons/bx-plus.svg") center center/contain no-repeat;
+  background-color: #f4f4f4;
+  cursor: pointer;
+}
+
+.qte-minus::before {
+  display: inline-block;
+  content: "";
+  width: 25px;
+  height: 25px;
+  background: url("../icons/bx-minus.svg") center center/contain no-repeat;
+  background-color: #f4f4f4;
+  cursor: pointer;
+}
+
+/*Button quantité sur la page Panier*/
+.input_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  bottom: 85px;
+}
+
+.minus-btn {
+  position: absolute;
+  left: 25px;
+}
+.minus-btn::before {
+  position: relative;
+  right: 40px;
+  display: inline-block;
+  content: "";
+  width: 25px;
+  height: 25px;
+  background: url("../icons/bx-minus.svg") center center/contain no-repeat;
+  background-color: #f4f4f4;
+}
+
+.plus-btn {
+  position: absolute;
+  left: 50px;
+}
+.plus-btn::before {
+  position: relative;
+  content: "";
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  background: url("../icons/bx-plus.svg") center center/contain no-repeat;
+  background-color: #f4f4f4;
+}

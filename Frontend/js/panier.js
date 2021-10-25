@@ -8,25 +8,52 @@
 let userProduct = JSON.parse(localStorage.getItem('product'));
 console.log(userProduct);
 
+let cartCount = localStorage.getItem('cartCount');
+//console.log(cartCount);
+
+const articleItem = document.querySelector('.count');
+//console.log(articleItem);
+
+function onLoadPage() {
+  let productNumbers = localStorage.getItem('cartCount');
+  if (productNumbers) {
+    articleItem.style.display = 'inline-block';
+    articleItem.textContent = productNumbers;
+  }
+}
+
+//Récupérer  l'icone panier avec le nombre de produit ajouter dans le panier
+function inCart() {
+  let productNumbers = localStorage.getItem('cartCount');
+
+  productNumbers = parseInt(productNumbers);
+  if (productNumbers) {
+    localStorage.setItem('cartCount', productNumbers);
+    articleItem.style.display = 'inline-block';
+    articleItem.textContent = productNumbers + 1;
+  } else {
+    localStorage.setItem('cartCount', 1);
+    articleItem.textContent = 1
+  }
+}
+onLoadPage();
+
+
+
 //Tableau pour stocker les éléménts disponible dans le localStorage pour les  ajouter au panier
+
 
 let cardItem = [];
 
 //Stocker les valeur du panier 
-const card = document.getElementById('card');
+const card = document.querySelector('.cart-item');
+//console.log(card);
 //console.log(card);
 
 const TotalPriceContainer = ` <div class="total-price" id="total__price">
           <div class="card__button">
           <a class="card__button__shop clear" id="clear" href="#"
           >Vider le panier</a>
-        </div>
-         <table class="total-table">
-            <tr>
-              <td>Montant total</td>
-              <td></td>
-            </tr>
-          </table>
       </div>`;
 //Mettre le code HTML du formulaire dans une variable
 
@@ -45,53 +72,50 @@ const addProductToCart = () => {
   } else {
     //Ajouter le produit selectionner dans le panier dans le tableau
     let userCard = [];
+    let i = 0;
     //Stocker les informations du produit selectionner
-    let userCardItem = [];
-    for (userCardItem = 0; userCardItem < userProduct.length; userCardItem++) {
+
+    for (i = 0; i < userProduct.length; i++) {
 
       //Ajout de la logique à afficher dans la variable card
       userCard +=
-        ` <div class="card__item">
-  <table class="card__item__table">
-    <thead class="card__item__thead">
-      <tr>
-        <th>Produits</th>
-        <th>Quantités</th>
-        <th>Prix</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
+        ` 
+      <tr class="cart-row">
         <td class="card__td">
           <div class="card__item__product">
             <img
-              src=" ${userProduct[userCardItem].productImg}"
-              alt="photo de ${userProduct[userCardItem].productName}"
+              src=" ${userProduct[i].productImg}"
+              alt="photo de ${userProduct[i].productName}"
             />
             <div class="card__item__infos">
-              <p>${userProduct[userCardItem].productName}</p>
-              <small>${userProduct[userCardItem].productOption}</small> <br />
+              <p>${userProduct[i].productName}</p>
+              <small>couleur: ${userProduct[i].productOption}</small> <br />
               <a href="#" id="btn_delete">Supprimer</a>
             </div>
           </div>
         </td>
-
-        <td>
-          <input type="number" value="1" />
-        </td>
-        <td class="price_infos">${userProduct[userCardItem].price}€ </td>
-      </tr>
-    </tbody>
-  </table>
+           <td class="td-container">
+           <div class="input_container">
+               <div class="minus-btn" id="minus"></div>
+                  <span type="number" class="number" id="quantite_produit">${userProduct[i].quantity}</span>
+                    <div class="plus-btn" id="plus"></div>
+                  </div>
+            <td class="price_infos">${userProduct[i].price} € </td>
+            </div>
+           </td>
+           </tr>
+   
 `;
     }
-    if (userCardItem == userProduct.length) {
+    if (i == userProduct.length) {
       //Afficher les éléments ajouter au panier sur le navigateur
       card.innerHTML = userCard + TotalPriceContainer;
     }
   }
 
 }
+
+
 addProductToCart();
 
 //Supprimer un élément du panier
@@ -112,9 +136,10 @@ const deleteCardItem = () => {
       //Supprimer le produit selectionner 
       userProduct = userProduct.filter(el => el.idProduct !== productIdValue);
 
-
       //Envoyer les modifications dans le localStorage
+      localStorage.setItem('cartCount')
       localStorage.setItem('product', JSON.stringify(userProduct));
+
 
       //Afficher à l'écran de l'utilisateur les modifications de son panier
       alert('Votre produit a été supprimer avec succès');
@@ -135,6 +160,7 @@ const deleteCardAllItem = () => {
   //Fonction pour vider le panier
   const deleteItem = () => {
     localStorage.removeItem('product');
+    localStorage.removeItem('cartCount');
     alert('Le panier a été vidé avec succès');
     //Actualiser la page après suppression des données
     location.href = "panier.html";
@@ -159,9 +185,7 @@ const deleteCardAllItem = () => {
 
 deleteCardAllItem();
 
-
 //Additionner le prix des articles 
-
 const allItemPrice = [];
 
 //Faire le total des prix des différents produits 
@@ -179,13 +203,21 @@ const addProductTotalPrice = () => {
     const reducer = (accumulator, currentValue) => accumulator + currentValue;
     let itemPriceCalc = allItemPrice.reduce(reducer);
 
-    const tablePrice = document.querySelector('.total-table');
+    const tablePrice = document.getElementById('total__price');
+    //console.log(tablePrice);
 
+
+
+    const totalPrice = `
+    <table class="total-table">
+       <tr>
+        <td>Montant total</td>
+        <td class="cart-total-price">${itemPriceCalc} €</td>
+    </tr>
+    </table>
+    `;
     // Afficher le prix sur le navigateur
-    tablePrice.innerHTML = `<tr>
-      <td>Montant total</td>
-      <td>${itemPriceCalc} €</td>
-    </tr>`;
+    tablePrice.insertAdjacentHTML('beforeend', totalPrice);
   }
 }
 
@@ -206,31 +238,31 @@ const displayForm = () => {
       <div class="pseudo-container">
         <label for="firstname">firstName</label>
         <input type="text" id="firstname"  autocomplete="off" />
-        <span></span>
+        <span class="span"></span>
       </div>
 
       <div class="lastname-container ">
         <label for="lastname">lastName</label>
         <input type="text" id="lastname"   autocomplete="off" />
-        <span></span>
+        <span class="span"></span>
       </div>
        
       <div class="adresse-container">
         <label for="address">adress</label>
         <input type="text" id="address"  autocomplete="off" />
-        <span></span>
+        <span class="span"></span>
       </div>
 
        <div class="city-container ">
         <label for="city">city</label>
         <input type="text" id="city" autocomplete="off" />
-        <span></span>
+        <span class="span"></span>
       </div>
 
       <div class="email-container">
         <label for="email">email</label>
         <input type="text" id="email" autocomplete="off" />
-        <span>Email incorrect</span>
+        <span class="span">Email incorrect</span>
       </div>
 
       <input type="submit" value="Valider" id="btn-valid" />
@@ -252,14 +284,11 @@ displayForm();
 //Récupérer les informations du formaulaire
 const confirmBtn = document.querySelector('#btn-valid');
 
-//let pseudo, email, adress, city;
-
 const inputs = document.querySelectorAll('input[type="text"]');
-console.log(inputs);
 
 let firstName, lastName, address, city, email;
 const form = document.querySelector('form');
-console.log(form);
+//console.log(form);
 
 
 //formErrorDisplay();
@@ -267,9 +296,9 @@ console.log(form);
 
 const getFormValues = () => {
 
-  //console.log(confirmBtn);
+
   //Afficher le message d'erreur si la valeur de l'utlisateur n'est pas valide
-  const formErrorDisplay = () => {
+  function formErrorDisplay() {
     //displayForm();
     const errorDisplay = (tag, message, valid) => {
       const container = document.querySelector(`.${tag}-container`);
@@ -283,9 +312,9 @@ const getFormValues = () => {
         container.classList.remove('error');
         span.textContent = message;
       }
-    }
+    };
 
-
+    //Récupérer les données saisis dans le champ adresse
     const adresseChecker = (value) => {
 
       if (value.length > 0 && (value.length < 3 ||
@@ -301,7 +330,8 @@ const getFormValues = () => {
         address = value;
       }
 
-    }
+    };
+    //Récupérer les données saisis dans le champ email
     const emailChecker = (value) => {
 
       if (!value.match(/^[\w_-]+@+[\w-]+\.[a-z]{2,4}$/i)) {
@@ -313,7 +343,8 @@ const getFormValues = () => {
         email = value;
 
       }
-    }
+    };
+    //Récupérer les données saisis dans le champ city
     const cityChecker = (value) => {
       if (value.length > 0 && (value.length < 3 ||
         value.length > 10)) {
@@ -328,7 +359,8 @@ const getFormValues = () => {
         errorDisplay('city', '', true);
         city = value;
       }
-    }
+    };
+    //Récupérer les données saisis dans le champ firstName
     const userChecker = (value) => {
       //console.log(value);
       //Si le numéro de l'utilsateur ne respecte pas les conditions requises 
@@ -338,10 +370,11 @@ const getFormValues = () => {
         firstName = null;
         //console.log(pseudo);
       }
+
       //SI le nom de l'utilisateur contient des caractères spéciaux
       else if (!value.match(/^[a-zA-Z0-9_.-]*$/)) {
         errorDisplay('pseudo', 'Votre nom ne doit pas contenir de caractères spéciaux ');
-        firstName = null
+        firstName = null;
 
       } else {
         errorDisplay('pseudo', '', true);
@@ -349,7 +382,8 @@ const getFormValues = () => {
 
         //lastName = value;
       }
-    }
+    };
+    //Récupérer les données saisis dans le champ LastName
     const LastNameChecker = (value) => {
       if (value.length > 0 && (value.length < 3 ||
         value.length > 20)) {
@@ -365,10 +399,9 @@ const getFormValues = () => {
         errorDisplay('lastname', '', true);
         lastName = value;
       }
-    }
+    };
     //console.log(userFirstName(e.target.value));
-
-    //console.log(inputs);
+    //Récupérer les valeurs des inputs et les stocker dans une boucle
     inputs.forEach((input) => {
       input.addEventListener('input', (e) => {
         //console.log(e.target.value);
@@ -391,7 +424,7 @@ const getFormValues = () => {
           default:
             null;
         }
-      })
+      });
     });
 
   }
@@ -403,60 +436,66 @@ const getFormValues = () => {
   //Ajouter un évènements sur le button 
   form.addEventListener('submit', (e) => {
 
-
     e.preventDefault();
     //Récupérer les données des champs du formulaire
-    if (firstName && lastName && address && city && email) {
-
-      class Form {
-        constructor() {
-          this.firstName = firstName;
-          this.lastName = lastName;
-          this.adresse = address;
-          this.city = city;
-          this.email = email;
-
-        }
+    class Form {
+      constructor() {
+        this.firstName = document.querySelector('#firstname').value;
+        this.lastName = document.querySelector('#lastname').value;
+        this.address = document.querySelector('#address').value;
+        this.city = document.querySelector('#city').value;
+        this.email = document.querySelector('#email').value;
       }
+    }
 
-      //Ajouter les valeurs de la classe
-      const formValues = new Form();
-      console.log(formValues);
+    let contact = new Form();
+    //console.log(contact)
 
+    localStorage.setItem('contact', JSON.stringify(contact));
+    //console.log(contact);
 
-      localStorage.setItem('formValues', JSON.stringify(formValues));
-
+    if (contact) {
+      //console.log(contact)
+      localStorage.setItem('contact', JSON.stringify(contact));
       inputs.forEach((input) => input.value = "")
-      firstName = null;
-      lastName = null;
-      address = null;
-      city = null;
-      email = null;
 
-    }
-    else {
-      alert("Veuillez compléter le formulaire s'il vous plait !");
+    } else {
+      alert('Veuillez remplir le formulaire Svp!');
     }
 
-    //Class constructeur pour afficher les valeurs du formulaire
+    //Stocker les id de tous les produits dans le tableau
+    let products = [];
+    //console.log(products);
 
-
-
-    //Gestion validation du formulaire
-
-    //Vérifie si le nom de l'utilisateur respecte certaines conditions
-    //let userName = formValues.firstName;
+    for (let i = 0; i < userProduct.length; i++) {
+      let productId = userProduct[i].idProduct;
+      //console.log(productId);
+      products.push(productId);
+    }
+    console.log("products");
+    console.log(products);
 
     //Envoyer dans le localStorage les informations du formulaires
-    localStorage.setItem('formValues', JSON.stringify(formValues));
+    //localStorage.setItem('formValues', JSON.stringify(formValues));
 
     //Envoyer les informations (Produits + infos du formulaire) de l'utilisateur dans le localStorage
-    const sendFormValues = {
-      userProduct,
-      formValues
-    }
-    console.log(sendFormValues);
-  });
+    let sendOrder = JSON.stringify({
+      contact,
+      products
+    });
+    console.log(sendOrder);
 
+    //Envoyer les données sur le serveur
+    const send = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      mode: "cors",
+      body: sendOrder
+    }
+    fetch('http://localhost:3000/api/teddies/order', send);
+    console.log(send);
+  })
 }
 getFormValues();
