@@ -92,7 +92,7 @@ const UpdateQuantityValue = async () => {
   productQuantity.insertAdjacentHTML("beforebegin", quantityHTML);
   let quantityNum = document.getElementById('quantite_produit');
 
-  console.log(typeof quantityNum);
+
   //let quantityContainer = document.querySelector('.quantity_container');
   let addBtnArr = document.getElementById('plus');
   let deducBtnArr = document.getElementById('minus');
@@ -153,12 +153,12 @@ function inCart() {
 
   productNumbers = parseInt(productNumbers);
   if (productNumbers) {
-    localStorage.setItem('cartCount', productNumbers);
+    localStorage.setItem('cartCount', productNumbers + 1);
     articleItem.style.display = 'inline-block';
     articleItem.textContent = productNumbers + 1;
   } else {
     localStorage.setItem('cartCount', 1);
-    articleItem.textContent = 1
+    articleItem.textContent = 1;
   }
 }
 onLoadPage();
@@ -170,8 +170,7 @@ const addUserProductSelect = async () => {
   //Selectionner l'ID du formulaire
   const selectID = document.getElementById('select');
   const quantityValue = document.getElementById('quantite_produit');
-  //console.log(selectID);
-  console.log(parseInt(quantityValue.innerText));
+
 
   //Stocker le choix de des options de  l'USER dans une variable
   const userOptionCheck = productDetail.colors;
@@ -229,13 +228,11 @@ const addUserProductSelect = async () => {
       if (confirm(`${productDetail.name}  couleur : ${userFormSelect}  a été ajouter à votre panier
     pour consulter appuyer sur Ok  et annuler pour continuer vos achats`)) {
         location.href = 'panier.html';
-
-
       }
 
       else {
         //confirmation()
-        location.href = 'produit.html?' + id;
+        location.href = 'produit.html?/' + id;
       }
 
     }
@@ -260,7 +257,7 @@ const addUserProductSelect = async () => {
       userCardItem();
       console.log(userProduct);
       confirmCard();
-      inCart();
+
     }
     //S'il y'a pas de produit enregistrer dans le localStorage
     else {
@@ -268,7 +265,6 @@ const addUserProductSelect = async () => {
       userCardItem();
       console.log(userProduct);
       confirmCard();
-      inCart();
     }
   });
 }

@@ -1,19 +1,11 @@
-//console.log("Je suis un panier");
-
 //Afficher les détails par produits sélectionner
-//Lien de l'API
-//http://localhost:3000/api/teddies;
-
 //Le localStorage 
 let userProduct = JSON.parse(localStorage.getItem('product'));
 console.log(userProduct);
 
+//Récuperer  le nombre de produit dans l'icone panier dans le localStorage
 let cartCount = localStorage.getItem('cartCount');
-//console.log(cartCount);
-
 const articleItem = document.querySelector('.count');
-//console.log(articleItem);
-
 function onLoadPage() {
   let productNumbers = localStorage.getItem('cartCount');
   if (productNumbers) {
@@ -22,33 +14,12 @@ function onLoadPage() {
   }
 }
 
-//Récupérer  l'icone panier avec le nombre de produit ajouter dans le panier
-function inCart() {
-  let productNumbers = localStorage.getItem('cartCount');
-
-  productNumbers = parseInt(productNumbers);
-  if (productNumbers) {
-    localStorage.setItem('cartCount', productNumbers);
-    articleItem.style.display = 'inline-block';
-    articleItem.textContent = productNumbers + 1;
-  } else {
-    localStorage.setItem('cartCount', 1);
-    articleItem.textContent = 1
-  }
-}
 onLoadPage();
-
-
-
 //Tableau pour stocker les éléménts disponible dans le localStorage pour les  ajouter au panier
-
-
 let cardItem = [];
 
 //Stocker les valeur du panier 
 const card = document.querySelector('.cart-item');
-//console.log(card);
-//console.log(card);
 
 const TotalPriceContainer = ` <div class="total-price" id="total__price">
           <div class="card__button">
@@ -56,7 +27,6 @@ const TotalPriceContainer = ` <div class="total-price" id="total__price">
           >Vider le panier</a>
       </div>`;
 //Mettre le code HTML du formulaire dans une variable
-
 
 const addProductToCart = () => {
   //Vérifier si le panier est vide ou si le panier ne contient aucun produit
@@ -73,8 +43,8 @@ const addProductToCart = () => {
     //Ajouter le produit selectionner dans le panier dans le tableau
     let userCard = [];
     let i = 0;
-    //Stocker les informations du produit selectionner
 
+    //Stocker les informations du produit selectionner
     for (i = 0; i < userProduct.length; i++) {
 
       //Ajout de la logique à afficher dans la variable card
@@ -115,7 +85,6 @@ const addProductToCart = () => {
 
 }
 
-
 addProductToCart();
 
 //Supprimer un élément du panier
@@ -131,14 +100,26 @@ const deleteCardItem = () => {
 
       //Selectionne produit à supprimer à l'aide de son ID
       const productIdValue = userProduct[i].idProduct;
+      //Selectionne le produit contenu dans l'icone panier 
+
 
 
       //Supprimer le produit selectionner 
       userProduct = userProduct.filter(el => el.idProduct !== productIdValue);
 
+
+      //Supprimer la quantité  afficher sur l'icone panier et dans le localStorage
+      const articleItem = document.querySelector('.count')
+      let article = localStorage.getItem('cartCount');
+      article = parseInt(cartCount);
+      if (article) {
+        localStorage.setItem('cartCount', article - 1);
+        articleItem.style.display = 'inline-block';
+        articleItem.textContent = article - 1;
+      }
       //Envoyer les modifications dans le localStorage
-      localStorage.setItem('cartCount')
       localStorage.setItem('product', JSON.stringify(userProduct));
+
 
 
       //Afficher à l'écran de l'utilisateur les modifications de son panier
@@ -150,7 +131,6 @@ const deleteCardItem = () => {
 }
 
 deleteCardItem();
-
 
 //Supprimer tous éléménts du panier
 const deleteCardAllItem = () => {
@@ -166,18 +146,12 @@ const deleteCardAllItem = () => {
     location.href = "panier.html";
   }
 
-
-
   //Button pour vider le panier
   deleteAllItem.addEventListener("click", (e) => {
     e.preventDefault();
     if (userProduct) {
       deleteItem();
       // console.log('Je suis vide');
-    } else {
-
-      deleteAllItem.removeEventListener('click', e);
-
     }
   });
 
@@ -201,25 +175,25 @@ const addProductTotalPrice = () => {
     allItemPrice.push(itemPrice);
 
     const reducer = (accumulator, currentValue) => accumulator + currentValue;
-    let itemPriceCalc = allItemPrice.reduce(reducer);
+    let priceTotal = allItemPrice.reduce(reducer);
 
     const tablePrice = document.getElementById('total__price');
-    //console.log(tablePrice);
-
-
 
     const totalPrice = `
     <table class="total-table">
        <tr>
         <td>Montant total</td>
-        <td class="cart-total-price">${itemPriceCalc} €</td>
+        <td class="cart-total-price">${priceTotal} €</td>
     </tr>
     </table>
     `;
     // Afficher le prix sur le navigateur
     tablePrice.insertAdjacentHTML('beforeend', totalPrice);
+    localStorage.setItem('priceTotal', JSON.stringify(priceTotal));
+
   }
 }
+
 
 addProductTotalPrice();
 
@@ -289,9 +263,6 @@ const inputs = document.querySelectorAll('input[type="text"]');
 let firstName, lastName, address, city, email;
 const form = document.querySelector('form');
 //console.log(form);
-
-
-//formErrorDisplay();
 
 
 const getFormValues = () => {
@@ -476,7 +447,7 @@ const getFormValues = () => {
     console.log(products);
 
     //Envoyer dans le localStorage les informations du formulaires
-    //localStorage.setItem('formValues', JSON.stringify(formValues));
+
 
     //Envoyer les informations (Produits + infos du formulaire) de l'utilisateur dans le localStorage
     let sendOrder = JSON.stringify({
@@ -494,7 +465,30 @@ const getFormValues = () => {
       mode: "cors",
       body: sendOrder
     }
-    fetch('http://localhost:3000/api/teddies/order', send);
+    fetch('http://localhost:3000/api/teddies/order', send)
+      .then(async (response) => {
+        try {
+          const res = await response.json();
+          //Si la reponse HTTP est 201 
+          if (response.ok) {
+            //Récupéer l'ID de la commande 
+            let orderId = res.orderId;
+            console.log(orderId);
+
+            //Enregistrer les données dans le LocalStorage
+            localStorage.setItem('orderId', JSON.stringify(orderId));
+            localStorage.setItem('contact', JSON.stringify(contact));
+
+            //Rédiriger vers la page confirmation de la commande
+            location.assign('confirmation.html?orderID=' + orderId)
+          } else {
+            alert(" Une erreur est survenue votre panier est peut être vide ou le formulaire n'a pas été correctement remplit!")
+          }
+
+        } catch {
+          console.error(error)
+        }
+      })
     console.log(send);
   })
 }

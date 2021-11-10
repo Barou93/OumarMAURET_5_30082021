@@ -2,16 +2,13 @@
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-//console.log("Je suis un panier");
 //Afficher les détails par produits sélectionner
-//Lien de l'API
-//http://localhost:3000/api/teddies;
 //Le localStorage 
 var userProduct = JSON.parse(localStorage.getItem('product'));
-console.log(userProduct);
-var cartCount = localStorage.getItem('cartCount'); //console.log(cartCount);
+console.log(userProduct); //Récuperer  le nombre de produit dans l'icone panier dans le localStorage
 
-var articleItem = document.querySelector('.count'); //console.log(articleItem);
+var cartCount = localStorage.getItem('cartCount');
+var articleItem = document.querySelector('.count');
 
 function onLoadPage() {
   var productNumbers = localStorage.getItem('cartCount');
@@ -20,30 +17,13 @@ function onLoadPage() {
     articleItem.style.display = 'inline-block';
     articleItem.textContent = productNumbers;
   }
-} //Récupérer  l'icone panier avec le nombre de produit ajouter dans le panier
-
-
-function inCart() {
-  var productNumbers = localStorage.getItem('cartCount');
-  productNumbers = parseInt(productNumbers);
-
-  if (productNumbers) {
-    localStorage.setItem('cartCount', productNumbers);
-    articleItem.style.display = 'inline-block';
-    articleItem.textContent = productNumbers + 1;
-  } else {
-    localStorage.setItem('cartCount', 1);
-    articleItem.textContent = 1;
-  }
 }
 
 onLoadPage(); //Tableau pour stocker les éléménts disponible dans le localStorage pour les  ajouter au panier
 
 var cardItem = []; //Stocker les valeur du panier 
 
-var card = document.querySelector('.cart-item'); //console.log(card);
-//console.log(card);
-
+var card = document.querySelector('.cart-item');
 var TotalPriceContainer = " <div class=\"total-price\" id=\"total__price\">\n          <div class=\"card__button\">\n          <a class=\"card__button__shop clear\" id=\"clear\" href=\"#\"\n          >Vider le panier</a>\n      </div>"; //Mettre le code HTML du formulaire dans une variable
 
 var addProductToCart = function addProductToCart() {
@@ -78,13 +58,24 @@ var deleteCardItem = function deleteCardItem() {
     deleteBtn[i].addEventListener('click', function (e) {
       e.preventDefault(); //Selectionne produit à supprimer à l'aide de son ID
 
-      var productIdValue = userProduct[i].idProduct; //Supprimer le produit selectionner 
+      var productIdValue = userProduct[i].idProduct; //Selectionne le produit contenu dans l'icone panier 
+      //Supprimer le produit selectionner 
 
       userProduct = userProduct.filter(function (el) {
         return el.idProduct !== productIdValue;
-      }); //Envoyer les modifications dans le localStorage
+      }); //Supprimer la quantité  afficher sur l'icone panier et dans le localStorage
 
-      localStorage.setItem('cartCount');
+      var articleItem = document.querySelector('.count');
+      var article = localStorage.getItem('cartCount');
+      article = parseInt(cartCount);
+
+      if (article) {
+        localStorage.setItem('cartCount', article - 1);
+        articleItem.style.display = 'inline-block';
+        articleItem.textContent = article - 1;
+      } //Envoyer les modifications dans le localStorage
+
+
       localStorage.setItem('product', JSON.stringify(userProduct)); //Afficher à l'écran de l'utilisateur les modifications de son panier
 
       alert('Votre produit a été supprimer avec succès');
@@ -116,8 +107,6 @@ var deleteCardAllItem = function deleteCardAllItem() {
 
     if (userProduct) {
       deleteItem(); // console.log('Je suis vide');
-    } else {
-      deleteAllItem.removeEventListener('click', e);
     }
   });
 };
@@ -138,12 +127,12 @@ var addProductTotalPrice = function addProductTotalPrice() {
       return accumulator + currentValue;
     };
 
-    var itemPriceCalc = allItemPrice.reduce(reducer);
-    var tablePrice = document.getElementById('total__price'); //console.log(tablePrice);
-
-    var totalPrice = "\n    <table class=\"total-table\">\n       <tr>\n        <td>Montant total</td>\n        <td class=\"cart-total-price\">".concat(itemPriceCalc, " \u20AC</td>\n    </tr>\n    </table>\n    "); // Afficher le prix sur le navigateur
+    var priceTotal = allItemPrice.reduce(reducer);
+    var tablePrice = document.getElementById('total__price');
+    var totalPrice = "\n    <table class=\"total-table\">\n       <tr>\n        <td>Montant total</td>\n        <td class=\"cart-total-price\">".concat(priceTotal, " \u20AC</td>\n    </tr>\n    </table>\n    "); // Afficher le prix sur le navigateur
 
     tablePrice.insertAdjacentHTML('beforeend', totalPrice);
+    localStorage.setItem('priceTotal', JSON.stringify(priceTotal));
   }
 };
 
@@ -162,7 +151,6 @@ var confirmBtn = document.querySelector('#btn-valid');
 var inputs = document.querySelectorAll('input[type="text"]');
 var firstName, lastName, address, city, email;
 var form = document.querySelector('form'); //console.log(form);
-//formErrorDisplay();
 
 var getFormValues = function getFormValues() {
   //Afficher le message d'erreur si la valeur de l'utlisateur n'est pas valide
@@ -323,7 +311,6 @@ var getFormValues = function getFormValues() {
 
     console.log("products");
     console.log(products); //Envoyer dans le localStorage les informations du formulaires
-    //localStorage.setItem('formValues', JSON.stringify(formValues));
     //Envoyer les informations (Produits + infos du formulaire) de l'utilisateur dans le localStorage
 
     var sendOrder = JSON.stringify({
@@ -340,7 +327,48 @@ var getFormValues = function getFormValues() {
       mode: "cors",
       body: sendOrder
     };
-    fetch('http://localhost:3000/api/teddies/order', send);
+    fetch('http://localhost:3000/api/teddies/order', send).then(function _callee(response) {
+      var res, orderId;
+      return regeneratorRuntime.async(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              _context.next = 3;
+              return regeneratorRuntime.awrap(response.json());
+
+            case 3:
+              res = _context.sent;
+
+              //Si la reponse HTTP est 201 
+              if (response.ok) {
+                //Récupéer l'ID de la commande 
+                orderId = res.orderId;
+                console.log(orderId); //Enregistrer les données dans le LocalStorage
+
+                localStorage.setItem('orderId', JSON.stringify(orderId));
+                localStorage.setItem('contact', JSON.stringify(contact)); //Rédiriger vers la page confirmation de la commande
+
+                location.assign('confirmation.html?orderID=' + orderId);
+              } else {
+                alert(" Une erreur est survenue votre panier est peut être vide ou le formulaire n'a pas été correctement remplit!");
+              }
+
+              _context.next = 10;
+              break;
+
+            case 7:
+              _context.prev = 7;
+              _context.t0 = _context["catch"](0);
+              console.error(error);
+
+            case 10:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, null, null, [[0, 7]]);
+    });
     console.log(send);
   });
 };

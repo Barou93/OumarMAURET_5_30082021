@@ -1,7 +1,5 @@
 "use strict";
 
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 //Afficher les détails par produits sélectionner
 //Lien de l'API
 //http://localhost:3000/api/teddies;
@@ -103,8 +101,7 @@ var UpdateQuantityValue = function UpdateQuantityValue() {
 
           quantityHTML = "\n   <div class=\"quantity_container\">\n           <div class=\"qte-minus\" id=\"minus\"></div>\n          <span type=\"number\" class=\"number\" id=\"quantite_produit\">".concat(number, "</span>\n          <div class=\"qte-plus\" id=\"plus\"></div>\n           </div>\n  ");
           productQuantity.insertAdjacentHTML("beforebegin", quantityHTML);
-          quantityNum = document.getElementById('quantite_produit');
-          console.log(_typeof(quantityNum)); //let quantityContainer = document.querySelector('.quantity_container');
+          quantityNum = document.getElementById('quantite_produit'); //let quantityContainer = document.querySelector('.quantity_container');
 
           addBtnArr = document.getElementById('plus');
           deducBtnArr = document.getElementById('minus');
@@ -114,7 +111,7 @@ var UpdateQuantityValue = function UpdateQuantityValue() {
 
           changeCartQuantity();
 
-        case 14:
+        case 13:
         case "end":
           return _context3.stop();
       }
@@ -141,7 +138,7 @@ function inCart() {
   productNumbers = parseInt(productNumbers);
 
   if (productNumbers) {
-    localStorage.setItem('cartCount', productNumbers);
+    localStorage.setItem('cartCount', productNumbers + 1);
     articleItem.style.display = 'inline-block';
     articleItem.textContent = productNumbers + 1;
   } else {
@@ -169,9 +166,7 @@ var addUserProductSelect = function addUserProductSelect() {
         case 4:
           //Selectionner l'ID du formulaire
           selectID = document.getElementById('select');
-          quantityValue = document.getElementById('quantite_produit'); //console.log(selectID);
-
-          console.log(parseInt(quantityValue.innerText)); //Stocker le choix de des options de  l'USER dans une variable
+          quantityValue = document.getElementById('quantite_produit'); //Stocker le choix de des options de  l'USER dans une variable
 
           userOptionCheck = productDetail.colors; //Tableau vide dans lequel les options choisis par l'utilisateur seront stocker
 
@@ -180,7 +175,7 @@ var addUserProductSelect = function addUserProductSelect() {
           _iteratorNormalCompletion = true;
           _didIteratorError = false;
           _iteratorError = undefined;
-          _context4.prev = 12;
+          _context4.prev = 11;
 
           for (_iterator = userOptionCheck[Symbol.iterator](); !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
             option = _step.value;
@@ -190,40 +185,40 @@ var addUserProductSelect = function addUserProductSelect() {
           //Afficher les options coleur sur le navigateur de l'utilisateur
 
 
-          _context4.next = 20;
+          _context4.next = 19;
           break;
 
-        case 16:
-          _context4.prev = 16;
-          _context4.t0 = _context4["catch"](12);
+        case 15:
+          _context4.prev = 15;
+          _context4.t0 = _context4["catch"](11);
           _didIteratorError = true;
           _iteratorError = _context4.t0;
 
-        case 20:
+        case 19:
+          _context4.prev = 19;
           _context4.prev = 20;
-          _context4.prev = 21;
 
           if (!_iteratorNormalCompletion && _iterator["return"] != null) {
             _iterator["return"]();
           }
 
-        case 23:
-          _context4.prev = 23;
+        case 22:
+          _context4.prev = 22;
 
           if (!_didIteratorError) {
-            _context4.next = 26;
+            _context4.next = 25;
             break;
           }
 
           throw _iteratorError;
 
+        case 25:
+          return _context4.finish(22);
+
         case 26:
-          return _context4.finish(23);
+          return _context4.finish(19);
 
         case 27:
-          return _context4.finish(20);
-
-        case 28:
           addUserSelection = document.getElementById('select');
           addUserSelection.innerHTML = options; //Selectionner le BUTTON pour ajouter l'article dans le panier
 
@@ -253,7 +248,7 @@ var addUserProductSelect = function addUserProductSelect() {
                 location.href = 'panier.html';
               } else {
                 //confirmation()
-                location.href = 'produit.html?' + id;
+                location.href = 'produit.html?/' + id;
               }
             }; //Fonction qui permet de stocker les articles de l'utilisateur sur le localStorage
 
@@ -273,23 +268,21 @@ var addUserProductSelect = function addUserProductSelect() {
               userCardItem();
               console.log(userProduct);
               confirmCard();
-              inCart();
             } //S'il y'a pas de produit enregistrer dans le localStorage
             else {
                 userProduct = [];
                 userCardItem();
                 console.log(userProduct);
                 confirmCard();
-                inCart();
               }
           });
 
-        case 32:
+        case 31:
         case "end":
           return _context4.stop();
       }
     }
-  }, null, null, [[12, 16, 20, 28], [21,, 23, 27]]);
+  }, null, null, [[11, 15, 19, 27], [20,, 22, 26]]);
 };
 
 addUserProductSelect(); //Récupérer les données de la balise Select

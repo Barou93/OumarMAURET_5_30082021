@@ -3,7 +3,8 @@
   text-align: center;
   text-decoration: none;
   list-style-type: none;
-  border-bottom: 1px solid #333;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 30%);
+  border-bottom: 2px #f4f4f4;
   &__container {
     display: flex;
     justify-content: space-between;

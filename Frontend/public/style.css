@@ -118,7 +118,8 @@ a {
   text-align: center;
   text-decoration: none;
   list-style-type: none;
-  border-bottom: 1px solid #333;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  border-bottom: 2px #f4f4f4;
 }
 .navbar__container {
   display: flex;
