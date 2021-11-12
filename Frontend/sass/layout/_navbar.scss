@@ -55,9 +55,7 @@
 
     &.shopcard {
       //Icone de  la page panier
-      border: 2px solid $color-tertiary;
-      width: 250px;
-      height: 50px;
+
       &::before {
         content: "";
         display: inline-block;

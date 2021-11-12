@@ -1,8 +1,6 @@
 "use strict";
 
 //Afficher les détails par produits sélectionner
-//Lien de l'API
-//http://localhost:3000/api/teddies;
 //Tableau vide dans lequel les produts selectionner seront stocker
 var productDetail = []; //Récuperation de la chaîne de requete dans l'URL
 
@@ -10,12 +8,10 @@ var queryStringUrlID = location.search; //Récupérer le nom de l'id de l'URL
 
 var urlSearchParams = new URLSearchParams(queryStringUrlID); //Affichage de l'ID du produit selectionner
 
-var productID = urlSearchParams.get('id'); //console.log(productID);
-//Affichage du produit contenu dans l'Objet qui a été sélectionner par l'ID
+var productID = urlSearchParams.get('id'); //Affichage du produit contenu dans l'Objet qui a été sélectionner par l'ID
 //Récupérer les produits de l'API
 
-var URL = 'http://localhost:3000/api/teddies' + '/' + productID; //console.log(URL);
-//Récupéter les informations de l'API 
+var URL = 'http://localhost:3000/api/teddies' + '/' + productID; //Récupéter les informations de l'API 
 
 var getProductsData = function getProductsData() {
   return regeneratorRuntime.async(function getProductsData$(_context) {
@@ -30,9 +26,6 @@ var getProductsData = function getProductsData() {
           }));
 
         case 2:
-          console.log(productDetail);
-
-        case 3:
         case "end":
           return _context.stop();
       }
@@ -180,9 +173,7 @@ var addUserProductSelect = function addUserProductSelect() {
           for (_iterator = userOptionCheck[Symbol.iterator](); !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
             option = _step.value;
             options += "\n     \n     <option value=\"".concat(option, "\" class=\"option \">").concat(option, "</option>\n     \n    ");
-          } //console.log(options);
-          //Stocker les produits de l'utilisateur dans le localStorage
-          //Afficher les options coleur sur le navigateur de l'utilisateur
+          } //Afficher les options coleur sur le navigateur de l'utilisateur
 
 
           _context4.next = 19;
@@ -222,14 +213,12 @@ var addUserProductSelect = function addUserProductSelect() {
           addUserSelection = document.getElementById('select');
           addUserSelection.innerHTML = options; //Selectionner le BUTTON pour ajouter l'article dans le panier
 
-          btnAddToCart = document.querySelector('.products__item__card__button'); //console.log(btnAddToCart);
-          //Ajouter un événement sur le button lors du click
+          btnAddToCart = document.querySelector('.products__item__card__button'); //Ajouter un événement sur le button lors du click
 
           btnAddToCart.addEventListener('click', function (e) {
             e.preventDefault();
             var userFormSelect = selectID.value;
-            var quantity = parseInt(quantityValue.innerText); //console.log(quantity);
-            //Afficher l'icone panier la quantité de produit ajouter au panier
+            var quantity = parseInt(quantityValue.innerText); //Afficher l'icone panier la quantité de produit ajouter au panier
 
             inCart(); //Récupérer les valeurs du produits et le mettre dans le panier
 
@@ -247,7 +236,6 @@ var addUserProductSelect = function addUserProductSelect() {
               if (confirm("".concat(productDetail.name, "  couleur : ").concat(userFormSelect, "  a \xE9t\xE9 ajouter \xE0 votre panier\n    pour consulter appuyer sur Ok  et annuler pour continuer vos achats"))) {
                 location.href = 'panier.html';
               } else {
-                //confirmation()
                 location.href = 'produit.html?/' + id;
               }
             }; //Fonction qui permet de stocker les articles de l'utilisateur sur le localStorage
@@ -260,11 +248,9 @@ var addUserProductSelect = function addUserProductSelect() {
             };
 
             var userProduct = JSON.parse(localStorage.getItem('product')); //La methode JSON.parse transforme une chaîne JSON en un objet JavaScript
-            //let saveUserData = [];
             //Si il y'a  déja  des produits enregristrer dans le localStorage 
 
             if (userProduct) {
-              //userProduct = [];
               userCardItem();
               console.log(userProduct);
               confirmCard();
@@ -285,4 +271,4 @@ var addUserProductSelect = function addUserProductSelect() {
   }, null, null, [[11, 15, 19, 27], [20,, 22, 26]]);
 };
 
-addUserProductSelect(); //Récupérer les données de la balise Select
+addUserProductSelect();

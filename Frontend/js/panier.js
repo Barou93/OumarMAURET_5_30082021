@@ -26,7 +26,8 @@ const TotalPriceContainer = ` <div class="total-price" id="total__price">
           <a class="card__button__shop clear" id="clear" href="#"
           >Vider le panier</a>
       </div>`;
-//Mettre le code HTML du formulaire dans une variable
+
+//Ajout les produits selectionner dans le panier
 
 const addProductToCart = () => {
   //Vérifier si le panier est vide ou si le panier ne contient aucun produit
@@ -189,6 +190,8 @@ const addProductTotalPrice = () => {
     `;
     // Afficher le prix sur le navigateur
     tablePrice.insertAdjacentHTML('beforeend', totalPrice);
+
+    //Stocker le prix total dans le localStorage
     localStorage.setItem('priceTotal', JSON.stringify(priceTotal));
 
   }
@@ -200,7 +203,7 @@ addProductTotalPrice();
 //Afficher le formulaire sur le navigateur
 const displayForm = () => {
   const formEl = document.querySelector('#card');
-  //console.log(formEl);
+
 
   const form = `
    <div class="title__container">
@@ -262,7 +265,7 @@ const inputs = document.querySelectorAll('input[type="text"]');
 
 let firstName, lastName, address, city, email;
 const form = document.querySelector('form');
-//console.log(form);
+
 
 
 const getFormValues = () => {
@@ -270,7 +273,7 @@ const getFormValues = () => {
 
   //Afficher le message d'erreur si la valeur de l'utlisateur n'est pas valide
   function formErrorDisplay() {
-    //displayForm();
+
     const errorDisplay = (tag, message, valid) => {
       const container = document.querySelector(`.${tag}-container`);
       const span = document.querySelector(`.${tag}-container > span`);
@@ -333,13 +336,13 @@ const getFormValues = () => {
     };
     //Récupérer les données saisis dans le champ firstName
     const userChecker = (value) => {
-      //console.log(value);
+
       //Si le numéro de l'utilsateur ne respecte pas les conditions requises 
       if (value.length > 0 && (value.length < 3 ||
         value.length > 20)) {
         errorDisplay('pseudo', 'Le nom doit etre entre 3 et 20 caractères');
         firstName = null;
-        //console.log(pseudo);
+
       }
 
       //SI le nom de l'utilisateur contient des caractères spéciaux
@@ -351,7 +354,7 @@ const getFormValues = () => {
         errorDisplay('pseudo', '', true);
         firstName = value;
 
-        //lastName = value;
+
       }
     };
     //Récupérer les données saisis dans le champ LastName
@@ -371,7 +374,7 @@ const getFormValues = () => {
         lastName = value;
       }
     };
-    //console.log(userFirstName(e.target.value));
+
     //Récupérer les valeurs des inputs et les stocker dans une boucle
     inputs.forEach((input) => {
       input.addEventListener('input', (e) => {
@@ -420,13 +423,12 @@ const getFormValues = () => {
     }
 
     let contact = new Form();
-    //console.log(contact)
 
     localStorage.setItem('contact', JSON.stringify(contact));
-    //console.log(contact);
+
 
     if (contact) {
-      //console.log(contact)
+
       localStorage.setItem('contact', JSON.stringify(contact));
       inputs.forEach((input) => input.value = "")
 
@@ -436,15 +438,15 @@ const getFormValues = () => {
 
     //Stocker les id de tous les produits dans le tableau
     let products = [];
-    //console.log(products);
+
 
     for (let i = 0; i < userProduct.length; i++) {
       let productId = userProduct[i].idProduct;
-      //console.log(productId);
+
       products.push(productId);
     }
-    console.log("products");
-    console.log(products);
+
+
 
     //Envoyer dans le localStorage les informations du formulaires
 
@@ -454,7 +456,7 @@ const getFormValues = () => {
       contact,
       products
     });
-    console.log(sendOrder);
+
 
     //Envoyer les données sur le serveur
     const send = {
@@ -473,7 +475,7 @@ const getFormValues = () => {
           if (response.ok) {
             //Récupéer l'ID de la commande 
             let orderId = res.orderId;
-            console.log(orderId);
+
 
             //Enregistrer les données dans le LocalStorage
             localStorage.setItem('orderId', JSON.stringify(orderId));
@@ -489,7 +491,7 @@ const getFormValues = () => {
           console.error(error)
         }
       })
-    console.log(send);
+
   })
 }
 getFormValues();

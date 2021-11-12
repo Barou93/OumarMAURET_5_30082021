@@ -24,7 +24,7 @@ onLoadPage(); //Tableau pour stocker les éléménts disponible dans le localSto
 var cardItem = []; //Stocker les valeur du panier 
 
 var card = document.querySelector('.cart-item');
-var TotalPriceContainer = " <div class=\"total-price\" id=\"total__price\">\n          <div class=\"card__button\">\n          <a class=\"card__button__shop clear\" id=\"clear\" href=\"#\"\n          >Vider le panier</a>\n      </div>"; //Mettre le code HTML du formulaire dans une variable
+var TotalPriceContainer = " <div class=\"total-price\" id=\"total__price\">\n          <div class=\"card__button\">\n          <a class=\"card__button__shop clear\" id=\"clear\" href=\"#\"\n          >Vider le panier</a>\n      </div>"; //Ajout les produits selectionner dans le panier
 
 var addProductToCart = function addProductToCart() {
   //Vérifier si le panier est vide ou si le panier ne contient aucun produit
@@ -131,7 +131,8 @@ var addProductTotalPrice = function addProductTotalPrice() {
     var tablePrice = document.getElementById('total__price');
     var totalPrice = "\n    <table class=\"total-table\">\n       <tr>\n        <td>Montant total</td>\n        <td class=\"cart-total-price\">".concat(priceTotal, " \u20AC</td>\n    </tr>\n    </table>\n    "); // Afficher le prix sur le navigateur
 
-    tablePrice.insertAdjacentHTML('beforeend', totalPrice);
+    tablePrice.insertAdjacentHTML('beforeend', totalPrice); //Stocker le prix total dans le localStorage
+
     localStorage.setItem('priceTotal', JSON.stringify(priceTotal));
   }
 };
@@ -139,8 +140,7 @@ var addProductTotalPrice = function addProductTotalPrice() {
 addProductTotalPrice(); //Afficher le formulaire sur le navigateur
 
 var displayForm = function displayForm() {
-  var formEl = document.querySelector('#card'); //console.log(formEl);
-
+  var formEl = document.querySelector('#card');
   var form = "\n   <div class=\"title__container\">\n            <h2>Finaliser votre commande</h2>\n          </div>\n          </div>\n          <div class=\"form__container\">\n         <form>\n      <div class=\"pseudo-container\">\n        <label for=\"firstname\">firstName</label>\n        <input type=\"text\" id=\"firstname\"  autocomplete=\"off\" />\n        <span class=\"span\"></span>\n      </div>\n\n      <div class=\"lastname-container \">\n        <label for=\"lastname\">lastName</label>\n        <input type=\"text\" id=\"lastname\"   autocomplete=\"off\" />\n        <span class=\"span\"></span>\n      </div>\n       \n      <div class=\"adresse-container\">\n        <label for=\"address\">adress</label>\n        <input type=\"text\" id=\"address\"  autocomplete=\"off\" />\n        <span class=\"span\"></span>\n      </div>\n\n       <div class=\"city-container \">\n        <label for=\"city\">city</label>\n        <input type=\"text\" id=\"city\" autocomplete=\"off\" />\n        <span class=\"span\"></span>\n      </div>\n\n      <div class=\"email-container\">\n        <label for=\"email\">email</label>\n        <input type=\"text\" id=\"email\" autocomplete=\"off\" />\n        <span class=\"span\">Email incorrect</span>\n      </div>\n\n      <input type=\"submit\" value=\"Valider\" id=\"btn-valid\" />\n    </form>\n        </div>\n      \n      <div class=\"card__button\">\n        <a class=\"card__button__shop\" href=\"produit.html\"\n          >Continuez le shopping</a\n        >\n      </div>\n \n      ";
   formEl.insertAdjacentHTML('afterend', form);
 };
@@ -150,12 +150,11 @@ displayForm(); //Récupérer les informations du formaulaire
 var confirmBtn = document.querySelector('#btn-valid');
 var inputs = document.querySelectorAll('input[type="text"]');
 var firstName, lastName, address, city, email;
-var form = document.querySelector('form'); //console.log(form);
+var form = document.querySelector('form');
 
 var getFormValues = function getFormValues() {
   //Afficher le message d'erreur si la valeur de l'utlisateur n'est pas valide
   function formErrorDisplay() {
-    //displayForm();
     var errorDisplay = function errorDisplay(tag, message, valid) {
       var container = document.querySelector(".".concat(tag, "-container"));
       var span = document.querySelector(".".concat(tag, "-container > span"));
@@ -210,18 +209,17 @@ var getFormValues = function getFormValues() {
 
 
     var userChecker = function userChecker(value) {
-      //console.log(value);
       //Si le numéro de l'utilsateur ne respecte pas les conditions requises 
       if (value.length > 0 && (value.length < 3 || value.length > 20)) {
         errorDisplay('pseudo', 'Le nom doit etre entre 3 et 20 caractères');
-        firstName = null; //console.log(pseudo);
+        firstName = null;
       } //SI le nom de l'utilisateur contient des caractères spéciaux
       else if (!value.match(/^[a-zA-Z0-9_.-]*$/)) {
           errorDisplay('pseudo', 'Votre nom ne doit pas contenir de caractères spéciaux ');
           firstName = null;
         } else {
           errorDisplay('pseudo', '', true);
-          firstName = value; //lastName = value;
+          firstName = value;
         }
     }; //Récupérer les données saisis dans le champ LastName
 
@@ -237,8 +235,7 @@ var getFormValues = function getFormValues() {
         errorDisplay('lastname', '', true);
         lastName = value;
       }
-    }; //console.log(userFirstName(e.target.value));
-    //Récupérer les valeurs des inputs et les stocker dans une boucle
+    }; //Récupérer les valeurs des inputs et les stocker dans une boucle
 
 
     inputs.forEach(function (input) {
@@ -286,12 +283,10 @@ var getFormValues = function getFormValues() {
       this.email = document.querySelector('#email').value;
     };
 
-    var contact = new Form(); //console.log(contact)
-
-    localStorage.setItem('contact', JSON.stringify(contact)); //console.log(contact);
+    var contact = new Form();
+    localStorage.setItem('contact', JSON.stringify(contact));
 
     if (contact) {
-      //console.log(contact)
       localStorage.setItem('contact', JSON.stringify(contact));
       inputs.forEach(function (input) {
         return input.value = "";
@@ -301,23 +296,19 @@ var getFormValues = function getFormValues() {
     } //Stocker les id de tous les produits dans le tableau
 
 
-    var products = []; //console.log(products);
+    var products = [];
 
     for (var i = 0; i < userProduct.length; i++) {
-      var productId = userProduct[i].idProduct; //console.log(productId);
-
+      var productId = userProduct[i].idProduct;
       products.push(productId);
-    }
-
-    console.log("products");
-    console.log(products); //Envoyer dans le localStorage les informations du formulaires
+    } //Envoyer dans le localStorage les informations du formulaires
     //Envoyer les informations (Produits + infos du formulaire) de l'utilisateur dans le localStorage
+
 
     var sendOrder = JSON.stringify({
       contact: contact,
       products: products
-    });
-    console.log(sendOrder); //Envoyer les données sur le serveur
+    }); //Envoyer les données sur le serveur
 
     var send = {
       method: "POST",
@@ -343,8 +334,7 @@ var getFormValues = function getFormValues() {
               //Si la reponse HTTP est 201 
               if (response.ok) {
                 //Récupéer l'ID de la commande 
-                orderId = res.orderId;
-                console.log(orderId); //Enregistrer les données dans le LocalStorage
+                orderId = res.orderId; //Enregistrer les données dans le LocalStorage
 
                 localStorage.setItem('orderId', JSON.stringify(orderId));
                 localStorage.setItem('contact', JSON.stringify(contact)); //Rédiriger vers la page confirmation de la commande
@@ -369,7 +359,6 @@ var getFormValues = function getFormValues() {
         }
       }, null, null, [[0, 7]]);
     });
-    console.log(send);
   });
 };
 

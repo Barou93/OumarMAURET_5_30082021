@@ -1,6 +1,5 @@
 //Afficher les détails par produits sélectionner
-//Lien de l'API
-//http://localhost:3000/api/teddies;
+
 
 //Tableau vide dans lequel les produts selectionner seront stocker
 let productDetail = [];
@@ -14,14 +13,14 @@ const urlSearchParams = new URLSearchParams(queryStringUrlID);
 
 //Affichage de l'ID du produit selectionner
 const productID = urlSearchParams.get('id');
-//console.log(productID);
+
 
 //Affichage du produit contenu dans l'Objet qui a été sélectionner par l'ID
 
 //Récupérer les produits de l'API
 
 const URL = 'http://localhost:3000/api/teddies' + '/' + productID;
-//console.log(URL);
+
 
 
 //Récupéter les informations de l'API 
@@ -29,7 +28,7 @@ const getProductsData = async () => {
   await fetch(URL)
     .then((res) => res.json())
     .then((data) => productDetail = data)
-  console.log(productDetail);
+
 
 }
 
@@ -186,9 +185,9 @@ const addUserProductSelect = async () => {
      
     `
   }
-  //console.log(options);
 
-  //Stocker les produits de l'utilisateur dans le localStorage
+
+
 
 
   //Afficher les options coleur sur le navigateur de l'utilisateur
@@ -199,14 +198,13 @@ const addUserProductSelect = async () => {
 
   //Selectionner le BUTTON pour ajouter l'article dans le panier
   const btnAddToCart = document.querySelector('.products__item__card__button');
-  //console.log(btnAddToCart);
+
 
   //Ajouter un événement sur le button lors du click
   btnAddToCart.addEventListener('click', (e) => {
     e.preventDefault();
     const userFormSelect = selectID.value;
     const quantity = parseInt(quantityValue.innerText);
-    //console.log(quantity);
 
     //Afficher l'icone panier la quantité de produit ajouter au panier
     inCart();
@@ -231,7 +229,7 @@ const addUserProductSelect = async () => {
       }
 
       else {
-        //confirmation()
+
         location.href = 'produit.html?/' + id;
       }
 
@@ -246,14 +244,14 @@ const addUserProductSelect = async () => {
 
 
     let userProduct = JSON.parse(localStorage.getItem('product')); //La methode JSON.parse transforme une chaîne JSON en un objet JavaScript
-    //let saveUserData = [];
+
 
 
 
 
     //Si il y'a  déja  des produits enregristrer dans le localStorage 
     if (userProduct) {
-      //userProduct = [];
+
       userCardItem();
       console.log(userProduct);
       confirmCard();
@@ -273,4 +271,4 @@ addUserProductSelect();
 
 
 
-//Récupérer les données de la balise Select
+

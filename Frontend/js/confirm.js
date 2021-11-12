@@ -2,7 +2,7 @@
 let paramsUrl = new URL(location).searchParams;
 
 let order = paramsUrl.get("orderId");
-//console.log(order)
+
 
 
 //Récupérer l'id de la commande
@@ -10,11 +10,11 @@ let orderId = JSON.parse(localStorage.getItem('orderId'))
 
 //Récupérer des informations du formulaire
 let contact = JSON.parse(localStorage.getItem('contact'));
-console.log(contact)
+
 
 //Récuperations du prix total de la commande
 let total = JSON.parse(localStorage.getItem('priceTotal'));
-console.log(total)
+
 
 const display = () => {
     const confirm = document.querySelector('.checkout__container__title');
@@ -33,3 +33,19 @@ const display = () => {
 }
 
 display();
+
+//Supprimer les données stocker dans le localStorage
+const removeStorage = (key) => {
+    localStorage.removeItem(key);
+}
+removeStorage('orderId');
+removeStorage('cartCount');
+removeStorage('total');
+
+
+
+//Rédigier l'utilisateur vers la page accueil après la commande
+if (orderId == null || total == null) {
+    location.href = 'index.html';
+    localStorage.clear();
+}
