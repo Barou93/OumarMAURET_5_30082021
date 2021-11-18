@@ -43,10 +43,8 @@ const displayAllProducts = async () => {
                     <img src="${product.imageUrl}" alt="photo de ${product.name} " />
                     </div>
                     <div class="products__card">
-                    <a href="./produit.html?id=${product._id} " class="infos"
-                        >En savoir plus</a
-                    >
-                <a href="./produit.html?id=${product._id}" class="add_card">Commander</a>
+                     <p>${product.description}</p>
+                   <a href="./produit.html?id=${product._id}" class="add_card">Commander</a>
                 </div>
             </a>
         </div>

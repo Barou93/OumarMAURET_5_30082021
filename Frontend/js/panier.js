@@ -94,7 +94,7 @@ const deleteCardItem = () => {
   //Button pour supprimer chaque article
   const deleteBtn = document.querySelectorAll('#btn_delete');
 
-  //console.log(deleteBtn);
+
   for (let i = 0; i < deleteBtn.length; i++) {
     deleteBtn[i].addEventListener('click', (e) => {
       e.preventDefault();
@@ -152,7 +152,7 @@ const deleteCardAllItem = () => {
     e.preventDefault();
     if (userProduct) {
       deleteItem();
-      // console.log('Je suis vide');
+
     }
   });
 
@@ -245,12 +245,6 @@ const displayForm = () => {
       <input type="submit" value="Valider" id="btn-valid" />
     </form>
         </div>
-      
-      <div class="card__button">
-        <a class="card__button__shop" href="produit.html"
-          >Continuez le shopping</a
-        >
-      </div>
  
       `
   formEl.insertAdjacentHTML('afterend', form);
@@ -378,7 +372,7 @@ const getFormValues = () => {
     //Récupérer les valeurs des inputs et les stocker dans une boucle
     inputs.forEach((input) => {
       input.addEventListener('input', (e) => {
-        //console.log(e.target.value);
+
         switch (e.target.id) {
           case "firstname":
             userChecker(e.target.value);

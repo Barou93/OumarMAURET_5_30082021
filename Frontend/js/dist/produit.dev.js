@@ -74,7 +74,6 @@ var UpdateQuantityValue = function UpdateQuantityValue() {
             } else {
               number = number - 1;
               quantityNum.innerHTML = number;
-              console.log(number);
             }
           };
 
@@ -85,26 +84,22 @@ var UpdateQuantityValue = function UpdateQuantityValue() {
             } else {
               number = number + 1;
               quantityNum.innerHTML = number;
-              console.log(number);
             }
           };
 
           productQuantity = document.querySelector('.products__item__card');
-          number = 1; //console.log(productQuantity);
-
+          number = 1;
           quantityHTML = "\n   <div class=\"quantity_container\">\n           <div class=\"qte-minus\" id=\"minus\"></div>\n          <span type=\"number\" class=\"number\" id=\"quantite_produit\">".concat(number, "</span>\n          <div class=\"qte-plus\" id=\"plus\"></div>\n           </div>\n  ");
           productQuantity.insertAdjacentHTML("beforebegin", quantityHTML);
           quantityNum = document.getElementById('quantite_produit'); //let quantityContainer = document.querySelector('.quantity_container');
 
           addBtnArr = document.getElementById('plus');
           deducBtnArr = document.getElementById('minus');
-          console.log(addBtnArr, deducBtnArr);
-          number = quantityNum; //console.log(number);
-          //Ajouter une nouvelle quantité au produit selectionner 
+          number = quantityNum; //Ajouter une nouvelle quantité au produit selectionner 
 
           changeCartQuantity();
 
-        case 13:
+        case 12:
         case "end":
           return _context3.stop();
       }
@@ -113,8 +108,7 @@ var UpdateQuantityValue = function UpdateQuantityValue() {
 }; //Variable ou la quantité du panier sera stocker
 
 
-var articleItem = document.querySelector('.count');
-console.log(articleItem); //Afficher la quantité de produit dans le panier après rafraichissement de la page
+var articleItem = document.querySelector('.count'); //Afficher la quantité de produit dans le panier après rafraichissement de la page
 
 function onLoadPage() {
   var productNumbers = localStorage.getItem('cartCount');
@@ -252,13 +246,11 @@ var addUserProductSelect = function addUserProductSelect() {
 
             if (userProduct) {
               userCardItem();
-              console.log(userProduct);
               confirmCard();
             } //S'il y'a pas de produit enregistrer dans le localStorage
             else {
                 userProduct = [];
                 userCardItem();
-                console.log(userProduct);
                 confirmCard();
               }
           });

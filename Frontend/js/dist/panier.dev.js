@@ -52,7 +52,7 @@ addProductToCart(); //Supprimer un élément du panier
 
 var deleteCardItem = function deleteCardItem() {
   //Button pour supprimer chaque article
-  var deleteBtn = document.querySelectorAll('#btn_delete'); //console.log(deleteBtn);
+  var deleteBtn = document.querySelectorAll('#btn_delete');
 
   var _loop = function _loop(i) {
     deleteBtn[i].addEventListener('click', function (e) {
@@ -106,7 +106,7 @@ var deleteCardAllItem = function deleteCardAllItem() {
     e.preventDefault();
 
     if (userProduct) {
-      deleteItem(); // console.log('Je suis vide');
+      deleteItem();
     }
   });
 };
@@ -141,7 +141,7 @@ addProductTotalPrice(); //Afficher le formulaire sur le navigateur
 
 var displayForm = function displayForm() {
   var formEl = document.querySelector('#card');
-  var form = "\n   <div class=\"title__container\">\n            <h2>Finaliser votre commande</h2>\n          </div>\n          </div>\n          <div class=\"form__container\">\n         <form>\n      <div class=\"pseudo-container\">\n        <label for=\"firstname\">firstName</label>\n        <input type=\"text\" id=\"firstname\"  autocomplete=\"off\" />\n        <span class=\"span\"></span>\n      </div>\n\n      <div class=\"lastname-container \">\n        <label for=\"lastname\">lastName</label>\n        <input type=\"text\" id=\"lastname\"   autocomplete=\"off\" />\n        <span class=\"span\"></span>\n      </div>\n       \n      <div class=\"adresse-container\">\n        <label for=\"address\">adress</label>\n        <input type=\"text\" id=\"address\"  autocomplete=\"off\" />\n        <span class=\"span\"></span>\n      </div>\n\n       <div class=\"city-container \">\n        <label for=\"city\">city</label>\n        <input type=\"text\" id=\"city\" autocomplete=\"off\" />\n        <span class=\"span\"></span>\n      </div>\n\n      <div class=\"email-container\">\n        <label for=\"email\">email</label>\n        <input type=\"text\" id=\"email\" autocomplete=\"off\" />\n        <span class=\"span\">Email incorrect</span>\n      </div>\n\n      <input type=\"submit\" value=\"Valider\" id=\"btn-valid\" />\n    </form>\n        </div>\n      \n      <div class=\"card__button\">\n        <a class=\"card__button__shop\" href=\"produit.html\"\n          >Continuez le shopping</a\n        >\n      </div>\n \n      ";
+  var form = "\n   <div class=\"title__container\">\n            <h2>Finaliser votre commande</h2>\n          </div>\n          </div>\n          <div class=\"form__container\">\n         <form>\n      <div class=\"pseudo-container\">\n        <label for=\"firstname\">firstName</label>\n        <input type=\"text\" id=\"firstname\"  autocomplete=\"off\" />\n        <span class=\"span\"></span>\n      </div>\n\n      <div class=\"lastname-container \">\n        <label for=\"lastname\">lastName</label>\n        <input type=\"text\" id=\"lastname\"   autocomplete=\"off\" />\n        <span class=\"span\"></span>\n      </div>\n       \n      <div class=\"adresse-container\">\n        <label for=\"address\">adress</label>\n        <input type=\"text\" id=\"address\"  autocomplete=\"off\" />\n        <span class=\"span\"></span>\n      </div>\n\n       <div class=\"city-container \">\n        <label for=\"city\">city</label>\n        <input type=\"text\" id=\"city\" autocomplete=\"off\" />\n        <span class=\"span\"></span>\n      </div>\n\n      <div class=\"email-container\">\n        <label for=\"email\">email</label>\n        <input type=\"text\" id=\"email\" autocomplete=\"off\" />\n        <span class=\"span\">Email incorrect</span>\n      </div>\n\n      <input type=\"submit\" value=\"Valider\" id=\"btn-valid\" />\n    </form>\n        </div>\n \n      ";
   formEl.insertAdjacentHTML('afterend', form);
 };
 
@@ -240,7 +240,6 @@ var getFormValues = function getFormValues() {
 
     inputs.forEach(function (input) {
       input.addEventListener('input', function (e) {
-        //console.log(e.target.value);
         switch (e.target.id) {
           case "firstname":
             userChecker(e.target.value);

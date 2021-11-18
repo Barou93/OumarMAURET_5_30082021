@@ -78,7 +78,7 @@ const UpdateQuantityValue = async () => {
 
   const productQuantity = document.querySelector('.products__item__card');
   let number = 1;
-  //console.log(productQuantity);
+
 
   let quantityHTML = `
    <div class="quantity_container">
@@ -95,10 +95,10 @@ const UpdateQuantityValue = async () => {
   //let quantityContainer = document.querySelector('.quantity_container');
   let addBtnArr = document.getElementById('plus');
   let deducBtnArr = document.getElementById('minus');
-  console.log(addBtnArr, deducBtnArr);
+
   number = quantityNum;
 
-  //console.log(number);
+
   //Ajouter une nouvelle quantité au produit selectionner 
   function addBtn() {
     //let count = parseInt(plus.innerText);
@@ -108,7 +108,7 @@ const UpdateQuantityValue = async () => {
     } else {
       number = number + 1;
       quantityNum.innerHTML = number;
-      console.log(number);
+
 
     }
   }
@@ -120,7 +120,7 @@ const UpdateQuantityValue = async () => {
     } else {
       number = number - 1;
       quantityNum.innerHTML = number;
-      console.log(number);
+
 
     }
   }
@@ -136,7 +136,7 @@ const UpdateQuantityValue = async () => {
 }
 //Variable ou la quantité du panier sera stocker
 const articleItem = document.querySelector('.count');
-console.log(articleItem);
+
 
 //Afficher la quantité de produit dans le panier après rafraichissement de la page
 function onLoadPage() {
@@ -253,7 +253,7 @@ const addUserProductSelect = async () => {
     if (userProduct) {
 
       userCardItem();
-      console.log(userProduct);
+
       confirmCard();
 
     }
@@ -261,7 +261,6 @@ const addUserProductSelect = async () => {
     else {
       userProduct = [];
       userCardItem();
-      console.log(userProduct);
       confirmCard();
     }
   });
